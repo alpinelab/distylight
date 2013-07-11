@@ -22,5 +22,9 @@
 
 <?php wp_footer(); ?>
 
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
+<script src="/wp-content/themes/bosc/js/application.js" type="text/javascript"></script>
+
 </body>
 </html>
