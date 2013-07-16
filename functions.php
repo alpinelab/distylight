@@ -1,14 +1,11 @@
 <?php
 
 /**
-* POR APPELER LE CUSTOM POST TYPE PORTFOLIO
+* POUR APPELER TOUS LES ELEMENTS CUSTOM DANS LE DOSSIER TYPES
 */
-require_once(ABSPATH.'wp-content/themes/bosc/types/portfolio.php');
+require_once(ABSPATH.'wp-content/themes/bosc/types/require.php');
 
-/**
-* POR APPELER LE CUSTOM METABOXES
-*/
-require_once(ABSPATH.'wp-content/themes/bosc/types/portfolio_metaboxes.php');
+
 
 /**
  * bosc functions and definitions
