@@ -2,3 +2,4 @@
 .ruby-gemset
 .sass-cache
 .DS_Store
+/wp-config.php
