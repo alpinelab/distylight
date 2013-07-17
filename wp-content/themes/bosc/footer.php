@@ -8,10 +8,11 @@
  */
 ?>
 
-	</div><!-- #main -->
+    </div><!-- #main -->
+	</div><!-- .container -->
 
 	<footer id="colophon" class="site-footer" role="contentinfo">
-		<div class="site-info">
+		<div class="container">
 			<?php do_action( 'bosc_credits' ); ?>
 			<a href="http://wordpress.org/" title="<?php esc_attr_e( 'A Semantic Personal Publishing Platform', 'bosc' ); ?>" rel="generator"><?php printf( __( 'Proudly powered by %s', 'bosc' ), 'WordPress' ); ?></a>
 			<span class="sep"> | </span>
