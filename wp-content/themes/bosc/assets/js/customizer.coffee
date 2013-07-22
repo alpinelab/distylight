@@ -6,7 +6,7 @@
 	wp.customize 'blogname', (value) ->
 		value.bind (to) ->
 			$('.site-title a').text(to)
-	wp.customize('blogdescription', (value) ->
+	wp.customize 'blogdescription', (value) ->
 		value.bind (to) ->
 			$( '.site-description' ).text(to)
 	# Header text color.
