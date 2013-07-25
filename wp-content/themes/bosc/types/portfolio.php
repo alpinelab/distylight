@@ -4,7 +4,7 @@ function register_portfolio() {
   $labels = array(
 //Les noms qui apparaisssnt dans le Back-Office de Wordpress
 
-    'name' => 'Portfolios', 
+    'name' => 'Projects',
     'singular_name' => 'Project',
     'add_new' => 'Add New',
     'add_new_item' => 'Add New Project',
@@ -14,7 +14,7 @@ function register_portfolio() {
     'view_item' => 'View Project',
     'search_items' => 'Search Projects',
     'not_found' =>  'No projects found',
-    'not_found_in_trash' => 'No projects found in Trash', 
+    'not_found_in_trash' => 'No projects found in Trash',
     'parent_item_colon' => '',
     'menu_name' => 'Projects'
   );
@@ -23,16 +23,16 @@ function register_portfolio() {
     'labels' => $labels,
     'public' => true,
     'publicly_queryable' => true,
-    'show_ui' => true, 
-    'show_in_menu' => true, 
+    'show_ui' => true,
+    'show_in_menu' => true,
     'query_var' => true,
     'rewrite' => array( 'slug' => 'portfolio' ),
     'capability_type' => 'post',
-    'has_archive' => true, 
+    'has_archive' => true,
     'hierarchical' => false,
     'menu_position' => 5,
     'supports' => array( 'title')
-  ); 
+  );
 
   register_post_type( 'portfolio', $args );
 }
@@ -45,7 +45,7 @@ add_action( 'init', 'register_portfolio' );
 add_action( 'init', 'create_portfolio_taxonomies', 0 );
 
 // create a taxonomy, genre for the post type "portfolio"
-function create_portfolio_taxonomies() 
+function create_portfolio_taxonomies()
     {
     // Add new taxonomy, make it hierarchical (like categories)
     $labels = array(
@@ -68,9 +68,9 @@ function create_portfolio_taxonomies()
         'show_ui'           => true,
         'show_admin_column' => true,
         'query_var'         => true,
-        'rewrite'           => array( 'slug' => 'genre' ),
+        'rewrite'           => array( 'slug' => 'portfolio_category' ),
     );
 
-    register_taxonomy( 'genre', array( 'portfolio' ), $args );
+    register_taxonomy( 'portfolio_category', array( 'portfolio' ), $args );
     }
 ?>

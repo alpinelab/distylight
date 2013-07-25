@@ -1,2 +1,2 @@
-$(document).ready ->
+jQuery(document).ready ($) ->
   # put some script here
