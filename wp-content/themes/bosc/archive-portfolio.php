@@ -1,6 +1,6 @@
 <?php
 /**
- * The Template for displaying all single posts.
+ * Template Name: Portfolio
  *
  * @package bosc
  */
@@ -29,7 +29,9 @@ get_header(); ?>
 </div>
 <div id="projects-grid" class="container">
   <?php
-  while ( have_posts() ) : the_post();
+  $args = array('post_type' => 'portfolio');
+  $posts = get_posts($args);
+  foreach ($posts as $post) : setup_postdata($post);
     $images = rwmb_meta( 'portfolio_project_gallery', 'type=image&size=portfolio_thumbnail');
       foreach($images as $image)
       {
@@ -54,7 +56,7 @@ get_header(); ?>
         <?php
         break;
       }
-  endwhile; ?>
+  endforeach; ?>
   <div class="span3 shuffle__sizer"></div>
 </div>
 
