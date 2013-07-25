@@ -29,8 +29,6 @@ get_header(); ?>
 </div>
 <div id="projects-grid" class="container">
   <?php
-  $i = 0;
-  $nbr_posts = wp_count_posts('portfolio')->publish;
   while ( have_posts() ) : the_post();
     $images = rwmb_meta( 'portfolio_project_gallery', 'type=image&size=portfolio_thumbnail');
       foreach($images as $image)
@@ -56,7 +54,6 @@ get_header(); ?>
         <?php
         break;
       }
-    $i++;
   endwhile; ?>
   <div class="span3 shuffle__sizer"></div>
 </div>
