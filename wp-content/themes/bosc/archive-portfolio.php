@@ -16,7 +16,7 @@ get_header(); ?>
         echo '<h5>genres</h5>';
         echo '<button class="btn btn-link" data-filter-value=""><span>All</span></button>';
         foreach ($terms as $term) {
-          $term_link = get_term_link($term, 'species');
+          $term_link = get_term_link($term);
           if(is_wp_error($term_link))
             continue;
           //We successfully got a link. Print it out.
