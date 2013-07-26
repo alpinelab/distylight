@@ -6,8 +6,8 @@
  */
 
 get_header(); ?>
-<div class="container-fluid">
-  <div class="row-fluid filter-options">
+<div class="container">
+  <div class="row filter-options">
     <div class="span12">
       <?php
       $terms = get_terms('portfolio_category');
@@ -31,7 +31,7 @@ get_header(); ?>
   <?php
   $args = array('post_type' => 'portfolio');
   $posts = get_posts($args);
-  foreach ($posts as $post) : setup_postdata($post);
+  foreach ($posts as $post) :
     $images = rwmb_meta( 'portfolio_project_gallery', 'type=image&size=portfolio_thumbnail');
       foreach($images as $image)
       {

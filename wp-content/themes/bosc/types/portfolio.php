@@ -1,5 +1,28 @@
 <?php
 
+add_action('manage_edit-portfolio_columns', 'portfolio_column_filter');
+add_action('manage_posts_custom_column', 'portfolio_column');
+
+// add a column to display thumbnail on admin panel.
+function portfolio_column_filter($columns){
+  $thumb = array('thumbnail' => 'Image');
+  $columns = array_slice($columns, 0, 1) + $thumb + array_slice($columns, 1, null);
+  return $columns;
+}
+
+function portfolio_column($column)
+{
+  global $post;
+  if($column == 'thumbnail'){
+    $images = rwmb_meta( 'portfolio_project_gallery', 'type=image');
+    foreach($images as $image){
+        echo edit_post_link("<img src='{$image['url']}'  alt='{$image['alt']}'/>",null, null, $post->ID);
+        break;
+    }
+  }
+}
+
+
 function register_portfolio() {
   $labels = array(
 //Les noms qui apparaisssnt dans le Back-Office de Wordpress

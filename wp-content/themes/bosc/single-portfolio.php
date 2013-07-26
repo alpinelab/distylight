@@ -1,7 +1,6 @@
 <?php get_header(); ?>
-
-<div class="container-fluid">
-  <div class="row-fluid">
+<div class="container">
+  <div class="row">
     <div class="span8">
       <!--Sidebar content-->
 <?php
@@ -22,6 +21,7 @@
 		<h4 class="entry-title"><?php echo rwmb_meta( 'portfolio_project_area' ); ?></h4>
 		<h4 class="entry-title"><?php echo rwmb_meta( 'portfolio_project_cost' ); ?> €</h4>
 		<p class="entry-title"><?php echo rwmb_meta( 'portfolio_project_editor' ); ?></p>
+    <p class="entry-title"><span><?php previous_post_link('%link', '<< précédent'); ?></span> project <span><?php next_post_link('%link', 'suivant >>'); ?></span></p>
     </div>
   </div>
 </div>
