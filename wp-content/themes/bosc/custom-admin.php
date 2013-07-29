@@ -97,4 +97,32 @@ if (check_user_role('editor')) {
 
 }
 
+//
+// Add projects to "Right Now" dashboard widget
+//
+function portfolio_in_rightnow() {
+  $types = 'portfolio';
+  if (!post_type_exists(''.$types.'')) { return; }
+  $num_posts = wp_count_posts(''.$types.'');
+  $nbr_ = 'Projet';
+  $nbr_s = 'Projets';
+  $num = number_format_i18n($num_posts->publish);
+  $text = _n('' . $nbr_ . '', '' . $nbr_s . '', intval($num_posts->publish));
+  if (current_user_can('edit_posts')) {
+    $num = "<a href='edit.php?post_type=$types'>$num</a>";
+    $text = "<a href='edit.php?post_type=$types'>$text</a>";
+  }
+  echo '<tr><td class="first b">' . $num . '</td><td class="t">' . $text . '</td></tr>';
+  if ($num_posts->pending > 0) {
+    $num = number_format_i18n($num_posts->pending);
+    $text = _n('En attente', 'En attentes', intval($num_posts->pending));
+    if (current_user_can('edit_posts')) {
+      $num = "<a href='edit.php?post_status=pending&post_type=$types'>$num</a>";
+      $text = "<a class='waiting' href='edit.php?post_status=pending&post_type=$types'>$text</a>";
+    }
+    echo '<tr><td class="first b">' . $num . '</td><td class="t">' . $text . '</td></tr>';
+  }
+}
+add_action('right_now_content_table_end', 'portfolio_in_rightnow');
+
 ?>
