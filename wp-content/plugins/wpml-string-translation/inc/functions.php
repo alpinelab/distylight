@@ -607,7 +607,10 @@ function icl_t($context, $name, $original_value=false, &$has_translation=null, $
 }
 
 function icl_add_string_translation($string_id, $language, $value = null, $status = false, $translator_id = null){
-    global $wpdb;
+    global $wpdb, $sitepress;
+    
+    $current_user = $sitepress->get_current_user();
+    
     
     $res = $wpdb->get_row("SELECT id, value, status FROM {$wpdb->prefix}icl_string_translations WHERE string_id='".$wpdb->escape($string_id)."' AND language='".$wpdb->escape($language)."'");
     
@@ -630,7 +633,7 @@ function icl_add_string_translation($string_id, $language, $value = null, $statu
         
         if(!empty($st_update)){
             if(!is_null($translator_id)){
-                $st_update['translator_id'] = get_current_user_id();
+                $st_update['translator_id'] = $current_user->ID;
             }
             $st_update['translation_date'] = current_time("mysql");
             $wpdb->update($wpdb->prefix.'icl_string_translations', $st_update, array('id'=>$st_id));
@@ -648,7 +651,7 @@ function icl_add_string_translation($string_id, $language, $value = null, $statu
             $st['value'] = $value;
         }
         if(!is_null($translator_id)){
-            $st_update['translator_id'] = get_current_user_id();
+            $st_update['translator_id'] = $current_user->ID;
         }        
         $wpdb->insert($wpdb->prefix.'icl_string_translations', $st);
         $st_id = $wpdb->insert_id;
@@ -672,6 +675,8 @@ function icl_get_string_id($string, $context){
 function icl_get_string_translations($offset=0){
     global $wpdb, $sitepress, $sitepress_settings, $wp_query, $icl_st_string_translation_statuses; 
     $string_translations = array();
+    
+    $current_user = $sitepress->get_current_user();
     
     $extra_cond = "";
     if(icl_st_is_translator() && isset($_GET['status']) && preg_match("#".ICL_STRING_TRANSLATION_WAITING_FOR_TRANSLATOR."-(.+)#", $_GET['status'], $matches)){
@@ -721,7 +726,7 @@ function icl_get_string_translations($offset=0){
     /* TRANSLATOR - START */
     if(icl_st_is_translator()){
         
-        $user_lang_pairs = get_user_meta(get_current_user_id(), $wpdb->prefix.'language_pairs', true);    
+        $user_lang_pairs = get_user_meta($current_user->ID, $wpdb->prefix.'language_pairs', true);    
         
         if(!empty($status_filter_lang)){
             
@@ -745,7 +750,7 @@ function icl_get_string_translations($offset=0){
                 " . join("\n", $_joins) . "
                 WHERE 
                     str_{$status_filter_lang}.status = ".ICL_STRING_TRANSLATION_WAITING_FOR_TRANSLATOR." AND
-                    (str_{$status_filter_lang}.translator_id IS NULL OR str_{$status_filter_lang}.translator_id = ".get_current_user_id().")
+                    (str_{$status_filter_lang}.translator_id IS NULL OR str_{$status_filter_lang}.translator_id = ".$current_user->ID.")
                     {$extra_cond}
                 ORDER BY string_id DESC
                 LIMIT {$offset},{$limit}
@@ -779,7 +784,7 @@ function icl_get_string_translations($offset=0){
                             if($l2['code'] == $sitepress_settings['st']['strings_language'] || empty($user_lang_pairs[$sitepress_settings['st']['strings_language']][$l2['code']])) continue;
                             $l2code_alias = str_replace('-', '', $l2['code']);
                             $_lwheres[] = " str_{$l2code_alias}.status = " . ICL_STRING_TRANSLATION_WAITING_FOR_TRANSLATOR . " OR 
-                                                str_{$l2code_alias}.translator_id = " . get_current_user_id() ;
+                                                str_{$l2code_alias}.translator_id = " . $current_user->ID ;
                         }
                         $_lwhere .= join(' OR ', $_lwheres )  . ')';
                         $_where[] = $_lwhere;
@@ -969,7 +974,9 @@ function icl_get_string_translations_by_id($string_id){
 function icl_get_relative_translation_status($string_id, $translator_id){
     global $wpdb, $sitepress, $sitepress_settings;
     
-    $user_lang_pairs = get_user_meta(get_current_user_id(), $wpdb->prefix.'language_pairs', true);    
+    $current_user = $sitepress->get_current_user();
+    
+    $user_lang_pairs = get_user_meta($current_user->ID, $wpdb->prefix.'language_pairs', true);    
     
     $src_langs = array_intersect(array_keys($sitepress->get_active_languages()), array_keys($user_lang_pairs[$sitepress_settings['st']['strings_language']]));
     
@@ -1190,8 +1197,11 @@ function icl_st_author_displayname_filter($value){
 }        
 
 function icl_st_translate_author_fields($field, $value, $user_id){
-    global $sitepress_settings;
-    if(empty($user_id)) $user_id = get_current_user_id();
+    global $sitepress_settings, $sitepress;
+    
+    $current_user = $sitepress->get_current_user();
+    
+    if(empty($user_id)) $user_id = $current_user->ID;
     
     $user = new WP_User($user_id);        
     if ( is_array( $user->roles ) && is_array($sitepress_settings['st']['translated-users'])  && array_intersect($user->roles, (array)$sitepress_settings['st']['translated-users'])){
@@ -1379,6 +1389,8 @@ function icl_st_get_contexts($status){
     global $wpdb, $sitepress, $sitepress_settings;    
     $extra_cond = '';
     
+    $current_user = $sitepress->get_current_user();
+    
     if($status !== false){
         if($status == ICL_STRING_TRANSLATION_COMPLETE){
             $extra_cond .= " AND s.status = " . ICL_STRING_TRANSLATION_COMPLETE;
@@ -1388,7 +1400,7 @@ function icl_st_get_contexts($status){
     }
     
     if(icl_st_is_translator()){
-        $user_langs = get_user_meta(get_current_user_id(), $wpdb->prefix.'language_pairs', true);
+        $user_langs = get_user_meta($current_user->ID, $wpdb->prefix.'language_pairs', true);
     
         $active_langs = $sitepress->get_active_languages();
         if(!empty($user_langs[$sitepress_settings['st']['strings_language']])){
@@ -1399,7 +1411,7 @@ function icl_st_get_contexts($status){
                     $joins[] = " JOIN {$wpdb->prefix}icl_string_translations {$lcode_alias}_str ON {$lcode_alias}_str.string_id = s.id AND {$lcode_alias}_str.language='{$lcode_alias}' AND
                     ( 
                         {$lcode_alias}_str.status = " . ICL_STRING_TRANSLATION_WAITING_FOR_TRANSLATOR . 
-                        " OR {$lcode_alias}_str.translator_id = " . get_current_user_id() 
+                        " OR {$lcode_alias}_str.translator_id = " . $current_user->ID
                     . ")" . "\n";
                         
                 }            
@@ -2437,10 +2449,11 @@ You can view your other translation jobs here: %s
 }
 
 function icl_st_reset_current_trasnslator_notifications(){
-    global $current_user, $wpdb;
+    global $sitepress, $wpdb;
+    $current_user = $sitepress->get_current_user();
     $mkey = $wpdb->prefix . 'strings_notification'; 
     if(!empty($current_user->$mkey)){
-        update_user_meta(get_current_user_id(), $mkey, array());
+        update_user_meta($current_user->ID, $mkey, array());
     }
 }
 
@@ -2616,8 +2629,9 @@ function icl_translation_add_string_translation($rid, $translation, $lang_code){
 }
 
 function icl_st_get_pending_string_translations_stats(){
-    global $wpdb, $current_user, $sitepress_settings;
-    get_currentuserinfo();
+    global $wpdb, $sitepress, $sitepress_settings;
+    
+    $current_user = $sitepress->get_current_user();
     
     $user_lang_pairs = get_user_meta($current_user->ID, $wpdb->prefix.'language_pairs', true);    
     

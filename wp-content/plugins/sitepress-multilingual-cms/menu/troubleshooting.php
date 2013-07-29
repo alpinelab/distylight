@@ -504,7 +504,7 @@ if( (isset($_POST['icl_reset_allnonce']) && $_POST['icl_reset_allnonce']==wp_cre
     
     <script type="text/javascript">
     jQuery(document).ready(function(){
-        jQuery('#icl_torubleshooting_more_options').submit(iclSaveForm);
+        jQuery('#icl_troubleshooting_more_options').submit(iclSaveForm);
     })
     </script>
     <br clear="all" /><br />
@@ -513,8 +513,8 @@ if( (isset($_POST['icl_reset_allnonce']) && $_POST['icl_reset_allnonce']==wp_cre
 
     <div class="icl_cyan_box" >
     <h3><?php _e('More options', 'sitepress')?></h3>
-    <form name="icl_torubleshooting_more_options" id="icl_torubleshooting_more_options" action="">
-    <?php wp_nonce_field('icl_torubleshooting_more_options_nonce', '_icl_nonce'); ?>
+    <form name="icl_troubleshooting_more_options" id="icl_troubleshooting_more_options" action="">
+    <?php wp_nonce_field('icl_troubleshooting_more_options_nonce', '_icl_nonce'); ?>
     <label><input type="checkbox" name="troubleshooting_options[raise_mysql_errors]" value="1" <?php 
         if(!empty($sitepress_settings['troubleshooting_options']['raise_mysql_errors'])): ?>checked="checked"<?php endif; ?>/>&nbsp;<?php 
         _e('Raise mysql errors on XML-RPC calls', 'sitepress')?></label>
@@ -734,9 +734,11 @@ if( (isset($_POST['icl_reset_allnonce']) && $_POST['icl_reset_allnonce']==wp_cre
         echo '<table class="widefat" style="width:300px;">';
         
         foreach($res as $row){
-            echo '<tr>';
-            $post_type = preg_replace('#^post_#', '', $row);
             
+            $post_type = preg_replace('#^post_#', '', $row);            
+            if($post_type == 'nav_menu_item') continue;
+            
+            echo '<tr>';
             echo '<td>' . $post_type . '</td>';
             
             if(isset($translatable_posts[$post_type])){
@@ -779,8 +781,11 @@ if( (isset($_POST['icl_reset_allnonce']) && $_POST['icl_reset_allnonce']==wp_cre
         echo '<table class="widefat" style="width:300px;">';
         
         foreach($res as $row){
-            echo '<tr>';
+            
             $tax = preg_replace('#^tax_#', '', $row);
+            if($tax == 'link_category' || $tax == 'nav_menu') continue;
+            
+            echo '<tr>';
             
             echo '<td>' . $tax . '</td>';
             

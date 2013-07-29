@@ -6,6 +6,11 @@
 require_once(ABSPATH.'wp-content/themes/bosc/types/require.php');
 
 
+/**
+ * Admin panel customization
+ */
+require_once(ABSPATH.'wp-content/themes/bosc/custom-admin.php');
+
 
 /**
  * bosc functions and definitions

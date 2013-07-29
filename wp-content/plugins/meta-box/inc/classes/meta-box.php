@@ -487,15 +487,18 @@ if ( ! class_exists( 'RW_Meta_Box' ) )
 		 */
 		function save_post( $post_id )
 		{
-			// Check whether:
-			// - form is submitted properly
-			if (
-				empty( $_POST["nonce_{$this->meta_box['id']}"] )
-				|| !wp_verify_nonce( $_POST["nonce_{$this->meta_box['id']}"], "rwmb-save-{$this->meta_box['id']}" )
-			)
-			{
+			// Check whether form is submitted properly
+			$id = $this->meta_box['id'];
+			if ( empty( $_POST["nonce_{$id}"] ) || !wp_verify_nonce( $_POST["nonce_{$id}"], "rwmb-save-{$id}" ) )
 				return;
-			}
+
+			// Autosave
+			if ( defined( 'DOING_AUTOSAVE' ) && !$this->meta_box['autosave'] )
+				return;
+
+			// Make sure meta is added to the post, not a revision
+			if ( $the_post = wp_is_post_revision( $post_id ) )
+				$post_id = $the_post;
 
 			// Save post action removed to prevent infinite loops
 			remove_action( 'save_post', array( $this, 'save_post' ) );
@@ -518,10 +521,6 @@ if ( ! class_exists( 'RW_Meta_Box' ) )
 				// 2nd filter applies to current field only
 				$new = apply_filters( "rwmb_{$field['type']}_value", $new, $field, $old );
 				$new = apply_filters( "rwmb_{$name}_value", $new, $field, $old );
-
-				// Stops images from being removed as per issue #287
-				if ( empty( $old ) && empty( $new ) )
-					continue;
 
 				// Call defined method to save meta value, if there's no methods, call common one
 				self::do_field_class_actions( $field, 'save', $new, $old, $post_id );
