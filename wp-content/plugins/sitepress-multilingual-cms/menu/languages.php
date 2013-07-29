@@ -290,10 +290,11 @@ global $language_switcher_defaults, $language_switcher_defaults_alt;
                                     <li>
                                         <label>
                                             <input<?php //if($icl_folder_url_disabled) echo ' disabled="disabled'; ?> type="radio" name="icl_language_negotiation_type" value="1" <?php if($sitepress_settings['language_negotiation_type']==1):?>checked="checked"<?php endif?> />                                                    
-                                            <?php echo sprintf(__('Different languages in directories (%s - %s, %s - %s, etc.)', 'sitepress'), 
-                                                    $sitepress->convert_url(trailingslashit(get_option('home')), $sitepress->get_default_language()),                                                    
+                                            <?php echo sprintf(__('Different languages in directories (%s%s - %s, %s - %s, etc.)', 'sitepress'), 
+                                                    trailingslashit(get_option('home')),                   
+                                                    empty($sitepress_settings['urls']['directory_for_default_language']) ? '' : trailingslashit($sitepress->get_default_language()),
                                                     $default_language['display_name'] , 
-                                                    $sitepress->convert_url(trailingslashit(get_option('home')), $sample_lang['code']),
+                                                    trailingslashit(get_option('home') . '/' . $sample_lang['code']),
                                                     $sample_lang['display_name'] ); 
                                                     ?>
                                         </label>

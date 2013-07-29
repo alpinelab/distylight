@@ -1,5 +1,10 @@
 <?php
 
+//function flush_rules(){
+//flush_rewrite_rules();
+//}
+//add_action('init','flush_rules');
+
 class WPML_Slug_Translation{
     
     
@@ -46,62 +51,59 @@ class WPML_Slug_Translation{
         $strings_language = $sitepress_settings['st']['strings_language'];
         
         if($sitepress->get_current_language() != $sitepress->get_default_language()){
-            $buff_value = array();
             
             $queryable_post_types = get_post_types( array('publicly_queryable' => true) );
-            
-            foreach((array)$value as $k=>$v){            
                 
-                foreach($queryable_post_types as $type){
+            foreach($queryable_post_types as $type){
                     
-                    if(!$sitepress->is_translated_post_type($type)) continue;
+                if(!$sitepress->is_translated_post_type($type)) continue;
                     
-                    // see if this slug string is registered. case of when it's not wrapped in a gettext call
-                    //$string_id = 
-                    
-                    $post_type_obj = get_post_type_object($type);
-                    $slug_translation = isset($post_type_obj->rewrite['slug']) ? $post_type_obj->rewrite['slug'] : false;
-                    
-                     if(false === strpos($k, $slug_translation)) continue;
-                    
-                    // get slug in default language
-                    if($strings_language == $sitepress->get_default_language()){
-                        $slug = $wpdb->get_var("
-                                    SELECT s.value 
-                                    FROM {$wpdb->prefix}icl_strings s    
-                                    JOIN {$wpdb->prefix}icl_string_translations t ON t.string_id = s.id
-                                    WHERE t.value='". $wpdb->escape($slug_translation)."' 
-                                        AND t.language = '" . $wpdb->escape($sitepress->get_current_language()) . "' 
-                                        AND s.name LIKE 'URL slug:%' 
-                                        AND s.language = '" . $wpdb->escape($strings_language) . "'
-                        ");
+                $post_type_obj = get_post_type_object($type);
+                $slug_translation = isset($post_type_obj->rewrite['slug']) ? $post_type_obj->rewrite['slug'] : false;
+                 
+                
+                // Determine slug
+                // get slug in default language
+                if($strings_language == $sitepress->get_default_language()){
+                    $slug = $wpdb->get_var("
+                                SELECT s.value 
+                                FROM {$wpdb->prefix}icl_strings s    
+                                JOIN {$wpdb->prefix}icl_string_translations t ON t.string_id = s.id
+                                WHERE t.value='". $wpdb->escape($slug_translation)."' 
+                                    AND t.language = '" . $wpdb->escape($sitepress->get_current_language()) . "' 
+                                    AND s.name LIKE 'URL slug:%' 
+                                    AND s.language = '" . $wpdb->escape($strings_language) . "'
+                    ");
+                }else{
+                    if($strings_language == $sitepress->get_current_language()){
+                        $slug = $wpdb->get_var($wpdb->prepare("
+                                    SELECT t.value 
+                                    FROM {$wpdb->prefix}icl_string_translations t
+                                        JOIN {$wpdb->prefix}icl_strings s ON t.string_id = s.id
+                                    WHERE t.language = %s AND s.name LIKE %s AND s.value = %s
+                                ", $sitepress->get_default_language(), 'URL slug: %', $slug_translation));
                     }else{
-                        if($strings_language == $sitepress->get_current_language()){
-                            $slug = $wpdb->get_var($wpdb->prepare("
-                                        SELECT t.value 
-                                        FROM {$wpdb->prefix}icl_string_translations t
-                                            JOIN {$wpdb->prefix}icl_strings s ON t.string_id = s.id
-                                        WHERE t.language = %s AND s.name LIKE %s AND s.value = %s
-                                    ", $sitepress->get_default_language(), 'URL slug: %', $slug_translation));
-                        }else{
-                            
-                            $slug_base_id = $wpdb->get_var($wpdb->prepare("
-                                SELECT s.id FROM {$wpdb->prefix}icl_strings s
-                                    JOIN {$wpdb->prefix}icl_string_translations st
-                                    ON st.string_id = s.id
-                                    WHERE st.language=%s AND st.value=%s AND s.name LIKE %s                        
-                            ", $sitepress->get_current_language(), $slug_translation, 'URL slug: %'));
-                            
-                            $slug = $wpdb->get_var($wpdb->prepare("
-                                        SELECT value
-                                        FROM {$wpdb->prefix}icl_string_translations 
-                                        WHERE string_id = %d
-                                            AND language = %s 
-                                        ", $slug_base_id, $sitepress->get_default_language()));
-                            
-                        }
-
+                        
+                        $slug_base_id = $wpdb->get_var($wpdb->prepare("
+                            SELECT s.id FROM {$wpdb->prefix}icl_strings s
+                                JOIN {$wpdb->prefix}icl_string_translations st
+                                ON st.string_id = s.id
+                                WHERE st.language=%s AND st.value=%s AND s.name LIKE %s                        
+                        ", $sitepress->get_current_language(), $slug_translation, 'URL slug: %'));
+                        
+                        $slug = $wpdb->get_var($wpdb->prepare("
+                                    SELECT value
+                                    FROM {$wpdb->prefix}icl_string_translations 
+                                    WHERE string_id = %d
+                                        AND language = %s 
+                                    ", $slug_base_id, $sitepress->get_default_language()));
+                        
                     }
+
+                }            
+                                     
+                $buff_value = array();                     
+                foreach((array)$value as $k=>$v){            
                     
                     if($slug && $slug != $slug_translation){                        
                         if(preg_match('#^[^/]*/?' . $slug . '/#', $k) && $slug != $slug_translation){
@@ -109,16 +111,18 @@ class WPML_Slug_Translation{
                         }
                     }
                     
+                    $buff_value[$k] = $v;
+                    
                 }
                 
-                $buff_value[$k] = $v;
+                $value = $buff_value;
+                unset($buff_value);                
+                
             }
-            $value = $buff_value;
-            unset($buff_value);
         }            
         
         return $value;
-    }
+    }  
     
     static function get_translated_slug($slug, $language){
         global $wpdb, $sitepress_settings, $sitepress;

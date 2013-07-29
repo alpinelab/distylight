@@ -17,7 +17,7 @@ class SitePress{
         
         // set up current user early
         // no authentication
-        if(isset($_COOKIE[LOGGED_IN_COOKIE])){
+        if(defined('LOGGED_IN_COOKIE') && isset($_COOKIE[LOGGED_IN_COOKIE])){
             list($username, $expiration, $hmac) = explode('|', $_COOKIE[LOGGED_IN_COOKIE]);        
             $user_id = $wpdb->get_var($wpdb->prepare("SELECT ID FROM {$wpdb->users} WHERE user_login = %s", $username));
         }else{
@@ -70,6 +70,7 @@ class SitePress{
         
         // Administration menus
         add_action('admin_menu', array($this, 'administration_menu'));        
+        add_action('admin_menu', array($this, 'administration_menu2'), 30);        
 
         add_action('init', array($this,'plugin_localization'));
         
@@ -642,6 +643,8 @@ class SitePress{
             }
         }
         
+        include ICL_PLUGIN_PATH . '/inc/translation-management/taxonomy-translation.php';
+        
         
     }
     
@@ -888,7 +891,7 @@ class SitePress{
         }
 
         if($this->admin_language != '' && !in_array($this->admin_language, $active_languages)){
-            delete_user_meta($current_user->data->ID,'icl_admin_language');
+            delete_user_meta($this->get_current_user()->ID,'icl_admin_language');
         }
         if(empty($this->settings['admin_default_language']) || !in_array($this->settings['admin_default_language'], $active_languages)){
             $this->settings['admin_default_language'] = '_default_';
@@ -973,7 +976,20 @@ class SitePress{
         //$alert = '&nbsp;<img width="12" height="12" style="margin-bottom:-2px;" src="'.ICL_PLUGIN_URL.'/res/img/alert.png" />';
          add_submenu_page($main_page,
             __('Support','sitepress'), __('Support','sitepress'), 'manage_options', ICL_PLUGIN_FOLDER . '/menu/support.php');
+            
+            
 
+    }
+    
+    // lower priority
+    function administration_menu2(){
+        return;
+        
+        $main_page = apply_filters('icl_menu_main_page', ICL_PLUGIN_FOLDER.'/menu/languages.php');
+        if($this->setup()){
+            add_submenu_page($main_page,
+                __('Taxonomy Translation','sitepress'), __('Taxonomy Translation','sitepress'), 'manage_options', ICL_PLUGIN_FOLDER . '/menu/taxonomy-translation.php');
+        }
     }
     
     function save_settings($settings=null){
@@ -1838,7 +1854,9 @@ class SitePress{
                 }
                 
                 // sync post format WP 3.1
-                if(function_exists('get_post_format')){ // as of WP 3.1
+                if(isset($_GET['trid']) && function_exists('get_post_format')){ // as of WP 3.1
+                    $post_type = isset($_GET['post_type']) ? $_GET['post_type'] : 'post';
+                    $translations = $this->get_element_translations($_GET['trid'], 'post_' . $post_type);
                     $source_lang = isset($_GET['source_lang'])?$_GET['source_lang']:$this->get_default_language();
                     $post_format = get_post_format($translations[$source_lang]->element_id);                    
                     if($post_format){
@@ -1994,7 +2012,10 @@ class SitePress{
             wp_enqueue_script('sitepress-scripts', ICL_PLUGIN_URL . '/res/js/scripts.js', array('jquery'), ICL_SITEPRESS_VERSION);
             if(isset($page_basename) && file_exists(ICL_PLUGIN_PATH . '/res/js/'.$page_basename.'.js')){
                 wp_enqueue_script('sitepress-' . $page_basename, ICL_PLUGIN_URL . '/res/js/'.$page_basename.'.js', array(), ICL_SITEPRESS_VERSION);
+            }else{
+                wp_enqueue_script('translate-taxonomy', ICL_PLUGIN_URL . '/res/js/taxonomy-translation.js', array('jquery'), ICL_SITEPRESS_VERSION);    
             }
+            
         }
     }
 
@@ -2033,6 +2054,7 @@ class SitePress{
 
         if (is_admin()) {
             wp_enqueue_style('thickbox');
+            wp_enqueue_style('translate-taxonomy', ICL_PLUGIN_URL . '/res/css/taxonomy-translation.css', array(), ICL_SITEPRESS_VERSION);
         }
 
     }
@@ -3312,10 +3334,19 @@ class SitePress{
     }
 
     function trash_post_actions($post_id){
+        global $wpdb;
+        $post_type = $wpdb->get_var("SELECT post_type FROM {$wpdb->posts} WHERE ID={$post_id}");
+        
+        // bulk deleting
+        // using this to not try to delete a post that's going to be deleted anyway
+        static $posts_to_delete_in_bulk;
+        if(is_null($posts_to_delete_in_bulk)){
+            $posts_to_delete_in_bulk = isset($_GET['post']) && is_array($_GET['post']) ? $_GET['post'] : array();
+        }
+        
         if($this->settings['sync_delete']){
-            global $wpdb;
-            static $trashed_posts = array();
-            $post_type = $wpdb->get_var("SELECT post_type FROM {$wpdb->posts} WHERE ID={$post_id}");
+            
+            static $trashed_posts = array();            
             if(isset($trashed_posts[$post_id])){
                 return; // avoid infinite loop
             }
@@ -3325,20 +3356,26 @@ class SitePress{
             $trid = $this->get_element_trid($post_id, 'post_' . $post_type);
             $translations = $this->get_element_translations($trid, 'post_' . $post_type);
             foreach($translations as $t){
-                if($t->element_id != $post_id){
+                if($t->element_id != $post_id && !in_array($t->element_id, $posts_to_delete_in_bulk)){
                     wp_trash_post($t->element_id);
+                    
                 }
             }
-            require_once ICL_PLUGIN_PATH . '/inc/cache.php';
-            icl_cache_clear($post_type.'s_per_language');
+            
+            
         }
+        
+        require_once ICL_PLUGIN_PATH . '/inc/cache.php';
+        icl_cache_clear($post_type.'s_per_language');
+        
     }
 
     function untrashed_post_actions($post_id){
-        if($this->settings['sync_delete']){
-            global $wpdb;
+        global $wpdb;
+        $post_type = $wpdb->get_var("SELECT post_type FROM {$wpdb->posts} WHERE ID={$post_id}");
+        
+        if($this->settings['sync_delete']){            
             static $untrashed_posts = array();
-            $post_type = $wpdb->get_var("SELECT post_type FROM {$wpdb->posts} WHERE ID={$post_id}");
 
             if(isset($untrashed_posts[$post_id])){
                 return; // avoid infinite loop
@@ -3353,10 +3390,11 @@ class SitePress{
                     wp_untrash_post($t->element_id);
                 }
             }
-            require_once ICL_PLUGIN_PATH . '/inc/cache.php';
-
-            icl_cache_clear($post_type.'s_per_language');
         }
+        
+        require_once ICL_PLUGIN_PATH . '/inc/cache.php';
+        icl_cache_clear($post_type.'s_per_language');
+        
     }
 
     function validate_taxonomy_input($input){
@@ -3998,7 +4036,7 @@ class SitePress{
             if($post_status){
                 $extra_cond .= apply_filters('_icl_posts_language_count_status',  " AND post_status IN('" . join("','", $post_status) . "') ");
             }              
-            if($post_status != 'trash'){
+            if($post_status != array('trash')){
                 $extra_cond .= " AND post_status <> 'trash'";
             }   
             // dont count auto drafts
@@ -5311,6 +5349,8 @@ class SitePress{
             $w_active_languages = apply_filters('icl_ls_languages', $w_active_languages);
 
             $w_active_languages = $this->sort_ls_languages($w_active_languages, $template_args);            
+            
+            wp_reset_query();
             
             return $w_active_languages;
 

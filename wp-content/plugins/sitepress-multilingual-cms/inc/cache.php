@@ -38,7 +38,7 @@ function icl_cache_clear($key = false){
         if(isset($icl_cache[$key])){
             unset($icl_cache[$key]);
         }     
-        
+                
         // special cache of 'per language' - clear different statuses
         if(false !== strpos($key, '_per_language')){
             foreach($icl_cache as $k => $v){
