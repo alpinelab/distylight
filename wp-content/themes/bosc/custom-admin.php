@@ -66,12 +66,34 @@ if (check_user_role('editor')) {
     remove_meta_box('dashboard_recent_comments', 'dashboard', 'core');
     remove_meta_box('dashboard_incoming_links', 'dashboard', 'core');
     remove_meta_box('dashboard_plugins', 'dashboard', 'core');
-    // remove_meta_box('dashboard_quick_press', 'dashboard', 'core');
+    remove_meta_box('dashboard_quick_press', 'dashboard', 'core');
     remove_meta_box('dashboard_recent_drafts', 'dashboard', 'core');
     remove_meta_box('dashboard_primary', 'dashboard', 'core'); // Other WordPress News
     remove_meta_box('dashboard_secondary', 'dashboard', 'core'); // WordPress Blog
   }
   add_action('admin_menu', 'disable_default_dashboard_widgets');
+
+  //
+  // Force dashboard to be on 1 column
+  //
+  function screen_layout_columns($columns) {
+    $columns['dashboard'] = 1;
+    return $columns;
+  }
+  add_filter('screen_layout_columns', 'screen_layout_columns');
+
+  function screen_layout_dashboard() {
+    return 1;
+  }
+  add_filter('get_user_option_screen_layout_dashboard', 'screen_layout_dashboard');
+
+  //
+  // Remove Screen Options button
+  //
+  function remove_screen_options() {
+    return false;
+  }
+  add_filter('screen_options_show_screen', 'remove_screen_options');
 
 }
 
