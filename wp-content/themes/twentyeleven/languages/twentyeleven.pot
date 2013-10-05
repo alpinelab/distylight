@@ -2,7 +2,7 @@
 # This file is distributed under the GNU General Public License v2 or later.
 msgid ""
 msgstr ""
-"Project-Id-Version: Twenty Eleven 1.5\n"
+"Project-Id-Version: Twenty Eleven 1.6\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/tags/twentyeleven\n"
 "POT-Creation-Date: 2013-06-18 22:14:12+00:00\n"
 "MIME-Version: 1.0\n"
@@ -266,7 +266,7 @@ msgstr ""
 msgid "Featured"
 msgstr ""
 
-#. #-#-#-#-#  twentyeleven.pot (Twenty Eleven 1.5)  #-#-#-#-#
+#. #-#-#-#-#  twentyeleven.pot (Twenty Eleven 1.6)  #-#-#-#-#
 #. Author URI of the plugin/theme
 #: footer.php:27
 msgid "http://wordpress.org/"
