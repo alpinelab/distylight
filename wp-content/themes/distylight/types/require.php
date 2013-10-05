@@ -27,6 +27,8 @@ require_once(ABSPATH.'wp-content/themes/distylight/types/slider_metaboxes.php');
 
 if (function_exists('add_image_size'))
 {
-  add_image_size('slider', 1200, 800, true);
-  add_image_size('portfolio_thumbnail', 300, 250, true);
+  add_image_size('slider-small',        1280, 800,  true);
+  add_image_size('slider-normal',       1680, 1050, true);
+  add_image_size('slider-large',        1920, 1200, true);
+  add_image_size('portfolio_thumbnail', 300,  250,  true);
 }

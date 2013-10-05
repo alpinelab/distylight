@@ -36,5 +36,5 @@
 		</div>
 	</header>
 
-	<div class="container">
-		<div id="main" class="site-main row">
+	<div class="container-fluid">
+		<div id="main" class="site-main row-fluid">
