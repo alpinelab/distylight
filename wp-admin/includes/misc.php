@@ -370,7 +370,7 @@ function set_screen_options() {
 }
 
 /**
- * Check if rewrite rule for WordPress already exists in the IIS 7 configuration file
+ * Check if rewrite rule for WordPress already exists in the IIS 7+ configuration file
  *
  * @since 2.8.0
  *
@@ -428,7 +428,7 @@ function iis7_delete_rewrite_rule($filename) {
 }
 
 /**
- * Add WordPress rewrite rule to the IIS 7 configuration file.
+ * Add WordPress rewrite rule to the IIS 7+ configuration file.
  *
  * @since 2.8.0
  *
@@ -639,21 +639,25 @@ add_filter( 'heartbeat_received', 'wp_refresh_post_lock', 10, 3 );
 function wp_refresh_post_nonces( $response, $data, $screen_id ) {
 	if ( array_key_exists( 'wp-refresh-post-nonces', $data ) ) {
 		$received = $data['wp-refresh-post-nonces'];
+		$response['wp-refresh-post-nonces'] = array( 'check' => 1 );
 
 		if ( ! $post_id = absint( $received['post_id'] ) )
 			return $response;
 
-		if ( ! current_user_can('edit_post', $post_id) )
+		if ( ! current_user_can( 'edit_post', $post_id ) || empty( $received['post_nonce'] ) )
 			return $response;
 
-		if ( ! empty( $received['post_nonce'] ) && 2 === wp_verify_nonce( $received['post_nonce'], 'update-post_' . $post_id ) ) {
+		if ( 2 === wp_verify_nonce( $received['post_nonce'], 'update-post_' . $post_id ) ) {
 			$response['wp-refresh-post-nonces'] = array(
-				'replace-autosavenonce' => wp_create_nonce('autosave'),
-				'replace-getpermalinknonce' => wp_create_nonce('getpermalink'),
-				'replace-samplepermalinknonce' => wp_create_nonce('samplepermalink'),
-				'replace-closedpostboxesnonce' => wp_create_nonce('closedpostboxes'),
-				'replace-_ajax_linking_nonce' => wp_create_nonce( 'internal-linking' ),
-				'replace-_wpnonce' => wp_create_nonce( 'update-post_' . $post_id ),
+				'replace' => array(
+					'autosavenonce' => wp_create_nonce('autosave'),
+					'getpermalinknonce' => wp_create_nonce('getpermalink'),
+					'samplepermalinknonce' => wp_create_nonce('samplepermalink'),
+					'closedpostboxesnonce' => wp_create_nonce('closedpostboxes'),
+					'_ajax_linking_nonce' => wp_create_nonce( 'internal-linking' ),
+					'_wpnonce' => wp_create_nonce( 'update-post_' . $post_id ),
+				),
+				'heartbeatNonce' => wp_create_nonce( 'heartbeat-nonce' ),
 			);
 		}
 	}
@@ -661,29 +665,3 @@ function wp_refresh_post_nonces( $response, $data, $screen_id ) {
 	return $response;
 }
 add_filter( 'heartbeat_received', 'wp_refresh_post_nonces', 10, 3 );
-
-/**
- * Output the HTML for restoring the post data from DOM storage
- *
- * @since 3.6
- * @access private
- */
-function _local_storage_notice() {
-	$screen = get_current_screen();
-	if ( ! $screen || 'post' != $screen->id )
-		return;
-
-	?>
-	<div id="local-storage-notice" class="hidden">
-	<p class="local-restore">
-		<?php _e('The backup of this post in your browser is different from the version below.'); ?>
-		<a class="restore-backup" href="#"><?php _e('Restore the backup.'); ?></a>
-	</p>
-	<p class="undo-restore hidden">
-		<?php _e('Post restored successfully.'); ?>
-		<a class="undo-restore-backup" href="#"><?php _e('Undo.'); ?></a>
-	</p>
-	</div>
-	<?php
-}
-add_action( 'admin_footer', '_local_storage_notice' );

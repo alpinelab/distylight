@@ -11,7 +11,6 @@ See http://codex.wordpress.org/Right_to_Left_Language_Support
  * Table of Contents:
  *
  * 1.0 - Reset
- * 2.0 - Repeatable Patterns
  * 4.0 - Header
  *   4.1 - Site Header
  *   4.2 - Navigation
@@ -122,13 +121,12 @@ div.nav-menu > ul {
 	right: 100%;
 }
 
-.main-navigation .searchform {
+.main-navigation .search-form {
 	left: 0;
 	right: auto;
 }
 
-.site-header .searchform [type="search"],
-.site-header .searchform [type="text"] {
+.site-header .search-field {
 	background-position: 98% center;
 	padding: 0 34px 0 0;
 }
@@ -260,19 +258,6 @@ div.nav-menu > ul {
 .format-chat .entry-meta .date a:before {
 	margin-left: 4px;
 	margin-right: auto;
-}
-
-.blog .format-gallery .gallery-item,
-.archive .format-gallery .gallery-item,
-.search .format-gallery .gallery-item {
-	margin-left: 4px;
-	margin-right: auto;
-}
-.blog .format-gallery .gallery-item img,
-.archive .format-gallery .gallery-item img,
-.search .format-gallery .gallery-item img {
-	position: absolute;
-	left: 0;
 }
 
 .format-image .wp-caption-text {
@@ -453,9 +438,9 @@ div.nav-menu > ul {
 
 .sidebar .comments-title,
 .sidebar .comment-list,
-.sidebar #reply-title,
+.sidebar .comment-reply-title,
 .sidebar .comment-navigation,
-.sidebar #respond #commentform {
+.sidebar .comment-respond .comment-form {
 	padding-left: 376px;
 	padding-right: 60px;
 }
@@ -499,14 +484,14 @@ div.nav-menu > ul {
 	transform:         scaleX(-1);
 }
 
-#reply-title small a {
+.comment-reply-title small a {
 	float: left;
 }
 
-#commentform [for="author"],
-#commentform [for="email"],
-#commentform [for="url"],
-#commentform [for="comment"] {
+.comment-form [for="author"],
+.comment-form [for="email"],
+.comment-form [for="url"],
+.comment-form [for="comment"] {
 	float: right;
 }
 
@@ -595,7 +580,7 @@ div.nav-menu > ul {
 		margin-right: auto;
 	}
 
-	.main-navigation .searchform {
+	.main-navigation .search-form {
 		left: 20px;
 		right: auto;
 	}
@@ -612,9 +597,9 @@ div.nav-menu > ul {
 	.sidebar .entry-summary,
 	.sidebar .entry-meta,
 	.sidebar .comment-list,
-	.sidebar #reply-title,
+	.sidebar .comment-reply-title,
 	.sidebar .comment-navigation,
-	.sidebar #respond #commentform,
+	.sidebar .comment-respond .comment-form,
 	.sidebar .featured-gallery,
 	.sidebar .post-navigation .nav-links,
 	.author.sidebar .author-info,
@@ -727,7 +712,7 @@ div.nav-menu > ul {
 		padding-right: 0;
 	}
 
-	.single .gallery-columns-3 .gallery-item:nth-of-type(3n) {
+	.gallery-columns-3 .gallery-item:nth-of-type(3n) {
 		margin-left: 4px;
 		margin-right: auto;
 	}
@@ -739,25 +724,18 @@ div.nav-menu > ul {
 		margin-right: 0;
 	}
 
+	.gallery .gallery-item:nth-of-type(even) {
+		margin-left: 0;
+		margin-right: auto;
+	}
+
 	.gallery .gallery-item,
-	.single .gallery-columns-2.gallery-size-thumbnail .gallery-item,
-	.blog .format-gallery .gallery-item,
-	.archive .format-gallery .gallery-item,
-	.search .format-gallery .gallery-item,
-	.single .gallery.gallery-columns-3 .gallery-item:nth-of-type(even),
+	.gallery.gallery-columns-3 .gallery-item:nth-of-type(even),
 	.gallery-columns-3 .gallery-item:nth-of-type(3n),
 	.gallery-columns-5 .gallery-item:nth-of-type(5n),
 	.gallery-columns-7 .gallery-item:nth-of-type(7n),
 	.gallery-columns-9 .gallery-item:nth-of-type(9n) {
 		margin-left: 4px;
-		margin-right: auto;
-	}
-
-	.blog .format-gallery .gallery-item:nth-of-type(odd),
-	.archive .format-gallery .gallery-item:nth-of-type(odd),
-	.search .format-gallery .gallery-item:nth-of-type(odd),
-	.single .gallery .gallery-item:nth-of-type(even) {
-		margin-left: 0;
 		margin-right: auto;
 	}
 

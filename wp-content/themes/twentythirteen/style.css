@@ -3,8 +3,8 @@ Theme Name: Twenty Thirteen
 Theme URI: http://wordpress.org/themes/twentythirteen
 Author: the WordPress team
 Author URI: http://wordpress.org/
-Description: The 2013 theme for WordPress takes us back to the blog, featuring a full range of post formats, each displayed beautifully in their own unique way. Design details abound, starting with a gorgeous color scheme and matching header images, optional display fonts for beautiful typography, and a wide layout that looks great on large screens yet remains device-agnostic and is readable on any device.
-Version: 0.1
+Description: The 2013 theme for WordPress takes us back to the blog, featuring a full range of post formats, each displayed beautifully in their own unique way. Design details abound, starting with a vibrant color scheme and matching header images, beautiful typography and icons, and a flexible layout that looks great on any device, big or small.
+Version: 1.0
 License: GNU General Public License v2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Tags: black, brown, orange, tan, white, yellow, light, one-column, two-columns, right-sidebar, flexible-width, custom-header, custom-menu, editor-style, featured-images, microformats, post-formats, rtl-language-support, sticky-post, translation-ready
@@ -467,24 +467,6 @@ hr {
  * ----------------------------------------------------------------------------
  */
 
-/**
- * Genericons, a flexible icon-font.
- * License: GPL version 2 or any later version with font exception (http://www.gnu.org/licenses/gpl-faq.html#FontException)
- * See also LICENSE.txt and COPYING.txt in the ./fonts directory.
- * Thanks to FontSquirrel for web-font conversion!
- * More info: genericons.com
- */
-@font-face {
-	font-family: Genericons;
-	font-style: normal;
-	font-weight: normal;
-	src: url(fonts/genericons-regular-webfont.eot);
-	src: url(fonts/genericons-regular-webfont.eot?#iefix) format("embedded-opentype"),
-		 url(fonts/genericons-regular-webfont.woff) format("woff"),
-		 url(fonts/genericons-regular-webfont.ttf) format("truetype"),
-		 url(fonts/genericons-regular-webfont.svg#genericonsregular) format("svg");
-}
-
 .genericon:before,
 .menu-toggle:after,
 .featured-post:before,
@@ -501,7 +483,7 @@ hr {
 .comment-awaiting-moderation:before,
 .comment-reply-link:before,
 .comment-reply-login:before,
-#reply-title small a:before,
+.comment-reply-title small a:before,
 .bypostauthor > .comment-body .fn:before,
 .error404 .page-title:before {
 	-webkit-font-smoothing: antialiased;
@@ -519,6 +501,9 @@ hr {
 .navigation:after,
 .nav-links:after,
 .gallery:after,
+.comment-form-author:after,
+.comment-form-email:after,
+.comment-form-url:after,
 .comment-body:after {
 	clear: both;
 }
@@ -539,6 +524,12 @@ hr {
 .nav-links:after,
 .gallery:before,
 .gallery:after,
+.comment-form-author:before,
+.comment-form-author:after,
+.comment-form-email:before,
+.comment-form-email:after,
+.comment-form-url:before,
+.comment-form-url:after,
 .comment-body:before,
 .comment-body:after {
 	content: "";
@@ -643,7 +634,7 @@ input[type="reset"]:active {
 	padding: 5px 24px 6px;
 }
 
-/* Placeholder text color -- selectors need to be in separate to work. */
+/* Placeholder text color -- selectors need to be separate to work. */
 ::-webkit-input-placeholder {
 	color: #7d7b6d;
 }
@@ -761,6 +752,12 @@ img.wp-smiley,
 	padding: 0;
 }
 
+.wp-caption.alignleft + ul,
+.wp-caption.alignleft + ol  {
+	list-style-position: inside;
+}
+
+
 /**
  * 3.0 Basic Structure
  * ----------------------------------------------------------------------------
@@ -770,9 +767,6 @@ img.wp-smiley,
 	background-color: #fff;
 	border-left: 1px solid #f2f2f2;
 	border-right: 1px solid #f2f2f2;
-	-webkit-box-sizing: content-box;
-	-moz-box-sizing:    content-box;
-	box-sizing:         content-box;
 	margin: 0 auto;
 	max-width: 1600px;
 	width: 100%;
@@ -881,15 +875,12 @@ div.nav-menu > ul {
 .nav-menu .sub-menu,
 .nav-menu .children {
 	background-color: #220e10;
-	border: 2px solid rgba(247, 245, 231, 1);
+	border: 2px solid #f7f5e7;
 	border-top: 0;
-	color: #fff;
 	display: none;
-	float: left;
 	padding: 0;
 	position: absolute;
 	left: -2px;
-	top: 45px;
 	z-index: 99999;
 }
 
@@ -937,14 +928,13 @@ ul.nav-menu li:hover > ul,
 	width: 100%;
 }
 
-.site-header .searchform {
+.site-header .search-form {
 	position: absolute;
 	right: 20px;
 	top: 1px;
 }
 
-.site-header .searchform [type="search"],
-.site-header .searchform [type="text"] {
+.site-header .search-field {
 	background-color: transparent;
 	background-image: url(images/search-icon.png);
 	background-position: 5px center;
@@ -961,8 +951,7 @@ ul.nav-menu li:hover > ul,
 	width: 0;
 }
 
-.site-header .searchform [type="search"]:focus,
-.site-header .searchform [type="text"]:focus {
+.site-header .search-field:focus {
 	background-color: #fff;
 	border: 2px solid #c3c0ab;
 	cursor: text;
@@ -1258,21 +1247,9 @@ footer.entry-meta {
 	margin: 0 auto 20px;
 }
 
-.gallery-columns-1 .gallery-item {
-	max-width: 100%;
-}
-
-.gallery-columns-2 .gallery-item {
-	max-width: 48%;
-	max-width: -webkit-calc(50% - 4px);
-	max-width:         calc(50% - 4px);
-	text-align: center;
-}
-
+.gallery-columns-1 .gallery-item,
+.gallery-columns-2 .gallery-item,
 .gallery-columns-3 .gallery-item {
-	max-width: 31%;
-	max-width: -webkit-calc(33.3% - 4px);
-	max-width:         calc(33.3% - 4px);
 	text-align: center;
 }
 
@@ -1507,89 +1484,6 @@ footer.entry-meta {
 	color: #722d19;
 }
 
-/* Blog gallery */
-.blog .format-gallery .gallery,
-.archive .format-gallery .gallery,
-.search .format-gallery .gallery {
-	margin-bottom: 20px;
-	margin-left: -4px;
-	max-width: 608px;
-}
-
-.blog .format-gallery .gallery-item,
-.archive .format-gallery .gallery-item,
-.search .format-gallery .gallery-item {
-	display: block;
-	height: 148px;
-	margin-right: 4px;
-	max-height: 100%;
-	max-width: 100%;
-	overflow: hidden;
-	width: 148px;
-}
-
-.blog .format-gallery .gallery-item img,
-.archive .format-gallery .gallery-item img,
-.search .format-gallery .gallery-item img {
-	height: 100%;
-	max-height: 148px;
-	max-width: none;
-	width: auto;
-}
-
-.blog .format-gallery .gallery-item .portrait img,
-.archive .format-gallery .gallery-item .portrait img,
-.search .format-gallery .gallery-item .portrait img {
-	height: auto;
-	max-height: none;
-	max-width: 148px;
-	width: 100%;
-}
-
-.blog .format-gallery .gallery-item:first-child,
-.archive .format-gallery .gallery-item:first-child,
-.search .format-gallery .gallery-item:first-child {
-	height: 300px;
-	width: 300px;
-}
-
-.blog .format-gallery .gallery-item:first-child img,
-.archive .format-gallery .gallery-item:first-child img,
-.search .format-gallery .gallery-item:first-child img {
-	max-height: 300px;
-}
-
-.blog .format-gallery .gallery-item:first-child .portrait img,
-.archive .format-gallery .gallery-item:first-child .portrait img,
-.search .format-gallery .gallery-item:first-child .portrait img {
-	max-height: none;
-	max-width: 300px;
-}
-
-.blog .format-gallery .gallery-item .gallery-icon,
-.archive .format-gallery .gallery-item .gallery-icon,
-.search .format-gallery .gallery-item .gallery-icon {
-	height: 100%;
-	-webkit-transform: translate(50%, 50%);
-	-ms-transform:     translate(50%, 50%);
-	transform:         translate(50%, 50%);
-	width: 100%;
-}
-
-.blog .format-gallery .gallery-item .gallery-icon img,
-.archive .format-gallery .gallery-item .gallery-icon img,
-.search .format-gallery .gallery-item .gallery-icon img {
-	-webkit-transform: translate(-50%, -50%);
-	-ms-transform:     translate(-50%, -50%);
-	transform:         translate(-50%, -50%);
-}
-
-.blog .format-gallery .gallery br,
-.archive .format-gallery .gallery br,
-.search .format-gallery .gallery br {
-	display: none;
-}
-
 /* Image */
 .format-image .entry-title {
 	font-size: 28px;
@@ -1762,7 +1656,7 @@ footer.entry-meta {
 	width: 13px;
 }
 
-.sidebar .format-status .entry-content p:first-child:before {
+.sidebar .format-status .entry-content > p:first-child:before {
 	left: 64px;
 }
 
@@ -2185,10 +2079,10 @@ footer.entry-meta {
 
 .comments-title,
 .comment-list,
-#reply-title,
+.comment-reply-title,
 .must-log-in,
-#respond #commentform,
-#respond iframe {
+.comment-respond .comment-form,
+.comment-respond iframe {
 	display: block;
 	margin-left: auto;
 	margin-right: auto;
@@ -2199,9 +2093,9 @@ footer.entry-meta {
 .sidebar .comments-title,
 .sidebar .comment-list,
 .sidebar .must-log-in,
-.sidebar #reply-title,
+.sidebar .comment-reply-title,
 .sidebar .comment-navigation,
-.sidebar #respond #commentform {
+.sidebar .comment-respond .comment-form {
 	max-width: 1040px;
 	padding-left: 60px;
 	padding-right: 376px;
@@ -2261,6 +2155,7 @@ footer.entry-meta {
 	color: #bc360a;
 	font-size: 14px;
 	font-style: normal;
+	font-weight: normal;
 }
 
 .says {
@@ -2336,21 +2231,21 @@ footer.entry-meta {
 }
 
 /* Comment form */
-#respond {
+.comment-respond {
 	background-color: #f7f5e7;
 	padding: 30px 0;
 }
 
-.comment #respond {
+.comment .comment-respond {
 	margin-bottom: 20px;
 	padding: 20px;
 }
 
-#reply-title {
+.comment-reply-title {
 	font: 300 italic 28px "Source Sans Pro", Helvetica, sans-serif;
 }
 
-#reply-title small a {
+.comment-reply-title small a {
 	color: #131310;
 	display: inline-block;
 	float: right;
@@ -2359,52 +2254,52 @@ footer.entry-meta {
 	width: 16px;
 }
 
-#reply-title small a:hover {
+.comment-reply-title small a:hover {
 	color: #ed331c;
 	text-decoration: none;
 }
 
-#reply-title small a:before {
+.comment-reply-title small a:before {
 	content: "\f406";
 	vertical-align: top;
 }
 
-.sidebar .comment-list #reply-title,
-.sidebar .comment-list #respond #commentform {
+.sidebar .comment-list .comment-reply-title,
+.sidebar .comment-list .comment-respond .comment-form {
 	padding: 0;
 }
 
-#commentform .comment-notes {
+.comment-form .comment-notes {
 	margin-bottom: 15px;
 }
 
-#commentform .comment-form-author,
-#commentform .comment-form-email,
-#commentform .comment-form-url {
+.comment-form .comment-form-author,
+.comment-form .comment-form-email,
+.comment-form .comment-form-url {
 	margin-bottom: 8px;
 }
 
-#commentform [for="author"],
-#commentform [for="email"],
-#commentform [for="url"],
-#commentform [for="comment"] {
+.comment-form [for="author"],
+.comment-form [for="email"],
+.comment-form [for="url"],
+.comment-form [for="comment"] {
 	float: left;
 	padding: 5px 0;
 	width: 120px;
 }
 
-#commentform .required {
+.comment-form .required {
 	color: #ed331c;
 }
 
-#commentform input[type="text"],
-#commentform input[type="email"],
-#commentform input[type="url"] {
+.comment-form input[type="text"],
+.comment-form input[type="email"],
+.comment-form input[type="url"] {
 	max-width: 270px;
 	width: 60%;
 }
 
-#commentform textarea {
+.comment-form textarea {
 	width: 100%;
 }
 
@@ -2541,12 +2436,8 @@ footer.entry-meta {
 }
 
 /* Search widget */
-.searchform [type="submit"] {
+.search-form .search-submit {
 	display: none;
-}
-
-.widget .searchform [type="text"] {
-	width: 100%;
 }
 
 /* RSS Widget */
@@ -2750,9 +2641,9 @@ footer.entry-meta {
 	.sidebar .entry-summary,
 	.sidebar .entry-meta,
 	.sidebar .comment-list,
-	.sidebar #reply-title,
+	.sidebar .comment-reply-title,
 	.sidebar .comment-navigation,
-	.sidebar #respond #commentform,
+	.sidebar .comment-respond .comment-form,
 	.sidebar .featured-gallery,
 	.sidebar .post-navigation .nav-links,
 	.author.sidebar .author-info {
@@ -2879,7 +2770,7 @@ footer.entry-meta {
 	.comments-area .comments-title,
 	.comments-area .comment-list,
 	.comments-area .comment-navigation,
-	#respond,
+	.comment-respond,
 	.sidebar .site-info,
 	.sidebar .paging-navigation .nav-links {
 		padding-left: 20px;
@@ -3010,14 +2901,14 @@ footer.entry-meta {
 		width:         calc(100% - 104px);
 	}
 
-	#commentform input[type="text"],
-	#commentform input[type="email"],
-	#commentform input[type="url"] {
+	.comment-form input[type="text"],
+	.comment-form input[type="email"],
+	.comment-form input[type="url"] {
 		width: -webkit-calc(100% - 120px);
 		width:         calc(100% - 120px);
 	}
 
-	#commentform textarea {
+	.comment-form textarea {
 		height: 80px; /* Smaller field for mobile. */
 	}
 
@@ -3041,29 +2932,23 @@ footer.entry-meta {
 	}
 
 	.gallery .gallery-item,
-	.single .gallery-columns-2.gallery-size-thumbnail .gallery-item,
-	.blog .format-gallery .gallery-item,
-	.archive .format-gallery .gallery-item,
-	.search .format-gallery .gallery-item {
+	.gallery-columns-2.gallery-size-thumbnail .gallery-item {
 		max-width: none;
 		width: 49%;
 		width: -webkit-calc(50% - 4px);
 		width:         calc(50% - 4px);
 	}
 
-	.single .gallery-columns-1.gallery-size-medium,
-	.single .gallery-columns-1.gallery-size-thumbnail,
-	.single .gallery-columns-2.gallery-size-thumbnail,
-	.single .gallery-columns-3.gallery-size-thumbnail {
+	.gallery-columns-1.gallery-size-medium,
+	.gallery-columns-1.gallery-size-thumbnail,
+	.gallery-columns-2.gallery-size-thumbnail,
+	.gallery-columns-3.gallery-size-thumbnail {
 		display: block;
 	}
 
 	.gallery-columns-1 .gallery-item,
-	.single .gallery-columns-1.gallery-size-medium .gallery-item,
-	.single .gallery-columns-1.gallery-size-thumbnail .gallery-item,
-	.blog .format-gallery .gallery-item:first-child,
-	.archive .format-gallery .gallery-item:first-child,
-	.search .format-gallery .gallery-item:first-child {
+	.gallery-columns-1.gallery-size-medium .gallery-item,
+	.gallery-columns-1.gallery-size-thumbnail .gallery-item {
 		text-align: center;
 		width: 98%;
 		width: -webkit-calc(100% - 4px);
@@ -3081,10 +2966,7 @@ footer.entry-meta {
 		display: none;
 	}
 
-	.blog .format-gallery .gallery-item:nth-of-type(odd),
-	.archive .format-gallery .gallery-item:nth-of-type(odd),
-	.search .format-gallery .gallery-item:nth-of-type(odd),
-	.single .gallery .gallery-item:nth-of-type(even) {
+	.gallery .gallery-item:nth-of-type(even) {
 		margin-right: 0;
 	}
 
@@ -3119,8 +3001,7 @@ footer.entry-meta {
 	(-webkit-min-device-pixel-ratio: 1.25),
 	(min-resolution: 120dpi) {
 
-	.site-header .searchform [type="search"],
-	.site-header .searchform [type="text"] {
+	.site-header .search-field {
 		background-image: url(images/search-icon-2x.png);
 	}
 
@@ -3169,7 +3050,7 @@ footer.entry-meta {
 
 	.author-avatar,
 	.site-footer,
-	#respond,
+	.comment-respond,
 	.comments-area .comment-edit-link,
 	.comments-area .reply,
 	.comments-link,

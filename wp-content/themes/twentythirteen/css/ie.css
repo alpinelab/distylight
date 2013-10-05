@@ -19,14 +19,9 @@ Styles for older IE versions (previous to IE9).
 .attachment-meta a:before:hover,
 .comment-awaiting-moderation:before:hover,
 .comment-reply-link:before:hover,
-#reply-title small a:before:hover,
+.comment-reply-title small a:before:hover,
 .bypostauthor > .comment-body .fn:before:hover {
 	text-decoration: none;
-}
-
-.nav-menu .sub-menu,
-.nav-menu .children {
-	left: 0;
 }
 
 .nav-menu .sub-menu ul,
@@ -38,8 +33,8 @@ Styles for older IE versions (previous to IE9).
 	max-width: 1040px;
 }
 
-.site-header .searchform [type="search"],
-.site-header .searchform [type="text"] {
+.site-header .search-form [type="search"],
+.site-header .search-form [type="text"] {
 	padding-top: 6px;
 }
 
@@ -230,8 +225,8 @@ img.alignleft {
 	top: 0;
 }
 
-.ie7 .site-header .searchform [type="search"],
-.ie7 .site-header .searchform [type="text"] {
+.ie7 .site-header .search-form [type="search"],
+.ie7 .site-header .search-form [type="text"] {
 	background-color: #fff;
 	border: 2px solid #c3c0ab;
 	cursor: text;
@@ -270,8 +265,8 @@ img.alignleft {
 
 .ie7 .comments-title,
 .ie7 .comment-list,
-.ie7 #reply-title,
-.ie7 #respond #commentform {
+.ie7 .comment-reply-title,
+.ie7 .comment-respond .comment-form {
 	width: 604px;
 }
 
