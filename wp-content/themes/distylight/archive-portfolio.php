@@ -2,7 +2,7 @@
 /**
  * Template Name: Portfolio
  *
- * @package bosc
+ * @package distylight
  */
 
 get_header(); ?>

@@ -3,23 +3,23 @@
 /**
 * POUR APPELER LE CUSTOM POST TYPE PORTFOLIO
 */
-require_once(ABSPATH.'wp-content/themes/bosc/types/portfolio.php');
+require_once(ABSPATH.'wp-content/themes/distylight/types/portfolio.php');
 
 /**
 * POUR APPELER LE CUSTOM METABOXES PORTFOLIO
 */
-require_once(ABSPATH.'wp-content/themes/bosc/types/portfolio_metaboxes.php');
+require_once(ABSPATH.'wp-content/themes/distylight/types/portfolio_metaboxes.php');
 
 
 /**
 * POUR APPELER LE CUSTOM POST TYPE SLIDER
 */
-require_once(ABSPATH.'wp-content/themes/bosc/types/slider.php');
+require_once(ABSPATH.'wp-content/themes/distylight/types/slider.php');
 
 /**
 * POUR APPELER LE CUSTOM METABOXES SLIDER
 */
-require_once(ABSPATH.'wp-content/themes/bosc/types/slider_metaboxes.php');
+require_once(ABSPATH.'wp-content/themes/distylight/types/slider_metaboxes.php');
 
 /**
 * POUR CREER DES TAILLES IMAGES PERSOS

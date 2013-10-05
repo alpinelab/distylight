@@ -2,7 +2,7 @@
 /**
  * The Template for displaying all single posts.
  *
- * @package bosc
+ * @package distylight
  */
 
 get_header(); ?>
@@ -14,7 +14,7 @@ get_header(); ?>
 
 			<?php get_template_part( 'content', 'single' ); ?>
 
-			<?php bosc_content_nav( 'nav-below' ); ?>
+			<?php distylight_content_nav( 'nav-below' ); ?>
 
 			<?php
 				// If comments are open or we have at least one comment, load up the comment template

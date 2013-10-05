@@ -13,39 +13,39 @@
 	<?php } // if ( ! empty( $header_image ) ) ?>
 
  *
- * @package bosc
+ * @package distylight
  */
 
 /**
  * Setup the WordPress core custom header feature.
  *
- * @uses bosc_header_style()
- * @uses bosc_admin_header_style()
- * @uses bosc_admin_header_image()
+ * @uses distylight_header_style()
+ * @uses distylight_admin_header_style()
+ * @uses distylight_admin_header_image()
  *
- * @package bosc
+ * @package distylight
  */
-function bosc_custom_header_setup() {
-	add_theme_support( 'custom-header', apply_filters( 'bosc_custom_header_args', array(
+function distylight_custom_header_setup() {
+	add_theme_support( 'custom-header', apply_filters( 'distylight_custom_header_args', array(
 		'default-image'          => '',
 		'default-text-color'     => '000',
 		'width'                  => 1000,
 		'height'                 => 250,
 		'flex-height'            => true,
-		'wp-head-callback'       => 'bosc_header_style',
-		'admin-head-callback'    => 'bosc_admin_header_style',
-		'admin-preview-callback' => 'bosc_admin_header_image',
+		'wp-head-callback'       => 'distylight_header_style',
+		'admin-head-callback'    => 'distylight_admin_header_style',
+		'admin-preview-callback' => 'distylight_admin_header_image',
 	) ) );
 }
-add_action( 'after_setup_theme', 'bosc_custom_header_setup' );
+add_action( 'after_setup_theme', 'distylight_custom_header_setup' );
 
-if ( ! function_exists( 'bosc_header_style' ) ) :
+if ( ! function_exists( 'distylight_header_style' ) ) :
 /**
  * Styles the header image and text displayed on the blog
  *
- * @see bosc_custom_header_setup().
+ * @see distylight_custom_header_setup().
  */
-function bosc_header_style() {
+function distylight_header_style() {
 	$header_text_color = get_header_textcolor();
 
 	// If no custom options for text are set, let's bail
@@ -77,15 +77,15 @@ function bosc_header_style() {
 	</style>
 	<?php
 }
-endif; // bosc_header_style
+endif; // distylight_header_style
 
-if ( ! function_exists( 'bosc_admin_header_style' ) ) :
+if ( ! function_exists( 'distylight_admin_header_style' ) ) :
 /**
  * Styles the header image displayed on the Appearance > Header admin panel.
  *
- * @see bosc_custom_header_setup().
+ * @see distylight_custom_header_setup().
  */
-function bosc_admin_header_style() {
+function distylight_admin_header_style() {
 ?>
 	<style type="text/css">
 		.appearance_page_custom-header #headimg {
@@ -105,15 +105,15 @@ function bosc_admin_header_style() {
 	</style>
 <?php
 }
-endif; // bosc_admin_header_style
+endif; // distylight_admin_header_style
 
-if ( ! function_exists( 'bosc_admin_header_image' ) ) :
+if ( ! function_exists( 'distylight_admin_header_image' ) ) :
 /**
  * Custom header image markup displayed on the Appearance > Header admin panel.
  *
- * @see bosc_custom_header_setup().
+ * @see distylight_custom_header_setup().
  */
-function bosc_admin_header_image() {
+function distylight_admin_header_image() {
 	$style        = sprintf( ' style="color:#%s;"', get_header_textcolor() );
 	$header_image = get_header_image();
 ?>
@@ -126,4 +126,4 @@ function bosc_admin_header_image() {
 	</div>
 <?php
 }
-endif; // bosc_admin_header_image
+endif; // distylight_admin_header_image

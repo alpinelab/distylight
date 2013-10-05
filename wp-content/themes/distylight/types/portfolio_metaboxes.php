@@ -121,7 +121,7 @@ $meta_boxes[] = array(
       'type' => 'wysiwyg',
       // Set the 'raw' parameter to TRUE to prevent data being passed through wpautop() on save
       'raw'  => false,
-      'std'  => __( 'Hello Bosci!', 'rwmb' ),
+      'std'  => __( 'Hello distylighti!', 'rwmb' ),
 
       // Editor settings, see wp_editor() function: look4wp.com/wp_editor
       'options' => array(
