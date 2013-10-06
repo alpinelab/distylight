@@ -20,20 +20,15 @@
 
 <body <?php body_class(); ?>>
 	<?php do_action( 'before' ); ?>
-	<header class="navbar navbar-fixed-top navbar-inverse" role="banner">
-		<div class="navbar-inner">
-			<div class="container">
-				<a class="brand" href="<?php echo esc_url( home_url( '/' ) ); ?>" title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>" rel="home">
-					<?php bloginfo( 'name' ); ?>
-				</a>
+	<header class="navigation" role="banner">
+		<a class="brand" href="<?php echo esc_url( home_url( '/' ) ); ?>" title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>" rel="home">
+			<img src="<?php bloginfo('template_directory') ?>/images/logo.svg" alt="<?php bloginfo( 'name' ); ?>" />
+		</a>
 
-				<?php wp_nav_menu(array(
-					'theme_location' 	=> 'primary',
-	        'container'  => false,
-  	      'menu_class' => 'nav'
-    	  )); ?>
-    	 </div>
-		</div>
+		<?php wp_nav_menu(array(
+			'theme_location' 	=> 'primary',
+      'container'  => false
+	  )); ?>
 	</header>
 
 	<div class="container-fluid">

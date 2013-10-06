@@ -5,3 +5,48 @@ body
 
 .container-fluid
   padding: 0
+
+header.navigation
+  position: fixed
+  width: 100%
+  top: 70%
+  left: 0
+  z-index: 200
+  background-color: rgba(0,0,0,0.7)
+  padding: 1em
+  .brand
+    float: left
+    display: block
+    margin-left: 12em
+    img
+      height: 5em
+  .menu
+    margin: 0
+    list-style: none
+    position: absolute
+    right: 0
+    li
+      margin: 0 6em 0 0
+      padding: 0
+      float: left
+      height: 5em
+      a
+        color: white
+        font-weight: bold
+        font-size: 2.4em
+        line-height: 1em
+        position: relative
+        &, &:hover
+        text-decoration: none
+        &::before
+          content: ''
+          position: absolute
+          width: 0.6em
+          height: 0.6em
+          background-image: url('/wp-content/themes/distylight/images/star.svg')
+          background-size: 100%
+          left: -0.7em
+          top: -0.2em
+          +opacity(0)
+      &.current-menu-item a::before
+        +opacity(100)
