@@ -19,6 +19,13 @@
   -o-animation-timing-function: $animation-timing-function
   animation-timing-function: $animation-timing-function
 
+@mixin width($value)
+  width: -webkit-#{$value}
+  width: -moz-#{$value}
+  width: -ms-#{$value}
+  width: -o-#{$value}
+  width: #{$value}
+
 @mixin keyframes($name)
   @-webkit-keyframes #{$name}
     @content

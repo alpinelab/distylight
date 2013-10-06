@@ -62,9 +62,10 @@ header.navigation
     display: none
     margin-right: 4em
     left: 50%
-    bottom: -1.5em
+    top: 70%
     font-size: 0.6em
-    width: -webkit-max-content
+    width: 100em // this is a fallback dirty value for what's next
+    +width(max-content)
     z-index: 300
     &:hover
       display: block
