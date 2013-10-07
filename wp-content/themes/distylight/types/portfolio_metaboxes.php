@@ -57,57 +57,48 @@ $meta_boxes[] = array(
       'desc'  => __( 'Entrer le lieu où se situe le projet', 'rwmb' ),
       'type'  => 'text',
       // Default value (optional)
-      'std'   => __( 'le lieu va là !', 'rwmb' ),
+      'std'   => __( 'le lieu va là', 'rwmb' ),
       // CLONES: Add to make the field cloneable (i.e. have multiple value)
       'clone' => false,
     ),
     // Client
     array(
       // Field name - Will be used as label
-      'name'  => __( "Maitrise d'ouvrage", 'rwmb' ),
+      'name'  => __( "Architecte", 'rwmb' ),
       // Field ID, i.e. the meta key
       'id'    => "{$prefix}project_client",
       // Field description (optional)
-      'desc'  => __( 'Nom du client', 'rwmb' ),
+      'desc'  => __( 'Entrer le nom de l\'architecte', 'rwmb' ),
       'type'  => 'text',
       // Default value (optional)
-      'std'   => __( 'le client va là !', 'rwmb' ),
+      'std'   => __( 'l\'archi va là', 'rwmb' ),
       // CLONES: Add to make the field cloneable (i.e. have multiple value)
       'clone' => false,
     ),
-    // Surface
+    // Puissance
     array(
       // Field name - Will be used as label
-      'name'  => __( "Surface du projet", 'rwmb' ),
+      'name'  => __( "Puissance énergétique du projet", 'rwmb' ),
       // Field ID, i.e. the meta key
       'id'    => "{$prefix}project_area",
       // Field description (optional)
-      'desc'  => __( 'Surface du projet', 'rwmb' ),
+      'desc'  => __( 'Entrer la puissance énergétique du projet', 'rwmb' ),
       'type'  => 'text',
       // Default value (optional)
-      'std'   => __( 'la surface putain!', 'rwmb' ),
+      'std'   => __( 'la puissance ici', 'rwmb' ),
       // CLONES: Add to make the field cloneable (i.e. have multiple value)
       'clone' => false,
-    ),
-    // Coût du projet
-    array(
-      'name' => __( 'Coût du projet', 'rwmb' ),
-      'id'   => "{$prefix}project_cost",
-      'type' => 'number',
-
-      'min'  => 0,
-      'step' => 10000,
     ),
     // Date de réalisation du projet
     array(
       'name' => __( 'Date de réalisation du projet', 'rwmb' ),
-      'desc'  => __( "Ne seront affiché que le mois et l'année", 'rwmb' ),
+      'desc'  => __( "Entrer la date de réalisation du projet", 'rwmb' ),
       'id'   => "{$prefix}project_date",
       'type' => 'date',
 
       // jQuery date picker options. See here http://api.jqueryui.com/datepicker
       'js_options' => array(
-        'appendText'      => __( '(dd-mm-yyyy)', 'rwmb' ),
+        'appendText'      => __( ' (ne seront affichés que le mois et l\'année)', 'rwmb' ),
         'dateFormat'      => __( 'dd-mm-yy', 'rwmb' ),
         'changeMonth'     => true,
         'changeYear'      => true,
@@ -121,7 +112,7 @@ $meta_boxes[] = array(
       'type' => 'wysiwyg',
       // Set the 'raw' parameter to TRUE to prevent data being passed through wpautop() on save
       'raw'  => false,
-      'std'  => __( 'Hello distylighti!', 'rwmb' ),
+      'std'  => __( 'We are Distylight, and we rock !', 'rwmb' ),
 
       // Editor settings, see wp_editor() function: look4wp.com/wp_editor
       'options' => array(

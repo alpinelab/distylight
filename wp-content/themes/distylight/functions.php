@@ -115,10 +115,6 @@ function distylight_scripts() {
 
 	wp_enqueue_script( 'twitter-bootstrap', '//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.2/js/bootstrap.min.js', array('jquery'), '2.3.2', true );
 
-	wp_enqueue_script( 'carouFredSel', get_bloginfo('template_directory') . '/assets/js/jquery.carouFredSel-6.2.1-packed.js', array('jquery'), '6.2.1', true );
-
-	wp_enqueue_script( 'carouFredSel-init', get_bloginfo('template_directory') . '/js/carouFredSel-init.js', array('jquery', 'carouFredSel'), '1.0', true );
-
 	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
 		wp_enqueue_script( 'comment-reply' );
 	}

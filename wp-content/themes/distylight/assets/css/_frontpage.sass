@@ -1,0 +1,95 @@
+@import bootstrap/mixins
+
+// All this CSS3-only slideshow method (with background-size: cover) is based on http://tympanus.net/codrops/2012/01/02/fullscreen-background-image-slideshow-with-css3/
+
+$numberOfImages: 6
+$imageDuration: 6s
+
+
++keyframes(slideImageAnimation)
+  0%
+    +opacity(0)
+    +animation-timing-function(ease-in)
+  8%
+    +opacity(100)
+  17%
+    +opacity(100)
+    +animation-timing-function(ease-out)
+  25%
+    +opacity(0)
+  100%
+    +opacity(0)
+
++keyframes(slideTitleAnimation)
+  0%
+    +opacity(0)
+  4%
+    +opacity(0)
+  10%
+    +opacity(50)
+    -webkit-transform: translateX(0)
+  17%
+    +opacity(50)
+    -webkit-transform: translateX(0)
+  19%
+    +opacity(0)
+    -webkit-transform: translateX(40em)
+  100%
+    +opacity(0)
+
+.codrops-slideshow
+  margin: 0
+
+  &, &:after
+    position: fixed
+    width: 100%
+    height: 100%
+    top: 0
+    left: 0
+    z-index: 0
+
+  &:after
+    content: ''
+    background: transparent url(/wp-content/themes/distylight/pattern.png) repeat top left
+
+  li
+    .image-placeholder
+      width: 100%
+      height: 100%
+      position: absolute
+      top: 0
+      left: 0
+      color: transparent
+      background-size: cover
+      background-position: 50% 50%
+      background-repeat: no-repeat
+      opacity: 0
+      z-index: 0
+      +animation(slideImageAnimation $numberOfImages*$imageDuration linear infinite 0s)
+
+    .title
+      z-index: 100
+      position: absolute
+      top: 5em
+      left: 0
+      width: 100%
+      text-align: right
+      opacity: 0
+      color: #fff
+      text-shadow: black 2px 2px 2px
+      +animation(slideTitleAnimation $numberOfImages*$imageDuration linear infinite 0s)
+
+      h3
+        font-family: 'BebasNeueRegular', 'Arial Narrow', Arial, sans-serif
+        font-size: 5em
+        padding: 0 0.5em 0 0
+        line-height: 1em
+
+    @for $i from 1 to 32
+      &:nth-child(#{$i})
+        span, div
+          +animation-delay(($i - 1)*$imageDuration)
+
+// Older browsers support : display only last picture
+.no-cssanimations .codrops-slideshow li span
+  +opacity(100)

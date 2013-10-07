@@ -13,9 +13,6 @@
 
 get_header();
 
-slider_show();
-
 get_footer();
-
 
 ?>
