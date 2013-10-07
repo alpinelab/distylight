@@ -9,7 +9,8 @@ body
 header.navigation
   position: fixed
   width: 100%
-  top: 70%
+  font-size: 1em
+  top: 60%
   left: 0
   z-index: 200
   background-color: rgba(0,0,0,0.7)
@@ -17,14 +18,14 @@ header.navigation
   .brand
     float: left
     display: block
-    margin-left: 12em
     img
-      height: 5em
+      margin: 2em
   .menu, .sub-menu
     margin: 0
     list-style: none
     position: absolute
     right: 0
+    top: 40%
     .menu-item
       margin: 0
       margin-right: 3em
@@ -35,7 +36,6 @@ header.navigation
       a
         color: white
         font-size: 2em
-        line-height: 2em
         position: relative
         text-decoration: none
         &:hover
@@ -62,10 +62,14 @@ header.navigation
     display: none
     margin-right: 4em
     left: 50%
-    top: 70%
     font-size: 0.6em
+    position: absolute
     width: 100em // this is a fallback dirty value for what's next
     +width(max-content)
     z-index: 300
     &:hover
       display: block
+    .menu-item
+      height: auto
+    a
+      line-height: 3em
