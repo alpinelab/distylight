@@ -20,23 +20,6 @@ $imageDuration: 6s
   100%
     +opacity(0)
 
-+keyframes(slideTitleAnimation)
-  0%
-    +opacity(0)
-  4%
-    +opacity(0)
-  10%
-    +opacity(50)
-    -webkit-transform: translateX(0)
-  17%
-    +opacity(50)
-    -webkit-transform: translateX(0)
-  19%
-    +opacity(0)
-    -webkit-transform: translateX(40em)
-  100%
-    +opacity(0)
-
 .codrops-slideshow
   margin: 0
 
@@ -66,18 +49,6 @@ $imageDuration: 6s
       opacity: 0
       z-index: 0
       +animation(slideImageAnimation $numberOfImages*$imageDuration linear infinite 0s)
-
-    .title
-      z-index: 100
-      position: absolute
-      top: 5em
-      left: 0
-      width: 100%
-      text-align: right
-      opacity: 0
-      color: #fff
-      text-shadow: black 2px 2px 2px
-      +animation(slideTitleAnimation $numberOfImages*$imageDuration linear infinite 0s)
 
       h3
         font-family: 'BebasNeueRegular', 'Arial Narrow', Arial, sans-serif
