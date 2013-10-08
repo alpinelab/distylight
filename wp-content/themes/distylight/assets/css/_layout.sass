@@ -2,8 +2,9 @@
 
 body
   background-color: black
+  padding-bottom: 15%
 
-.container-fluid
+.container
   padding: 0
 
 header.navigation
@@ -51,13 +52,15 @@ header.navigation
           left: -0.7em
           top: -0.2em
           +opacity(0)
-      &.current-menu-item > a
-        color: $dlYellow
-        &::before
-          +opacity(100)
+      &.current-menu-item, &.current-menu-parent
+        & > a
+          color: $dlYellow
+          &::before
+            +opacity(100)
 
-      &:hover .sub-menu, &.current-menu-ancestor .sub-menu
-        display: block
+      &:hover, &.current-menu-ancestor
+        .sub-menu
+          display: block
 
   .sub-menu
     display: none
@@ -74,3 +77,9 @@ header.navigation
       height: auto
     a
       line-height: 3em
+
+// This is a dirty exception to display sub-menu on a portfolio single page
+.single-portfolio
+  header.navigation
+    .sub-menu
+      display: block

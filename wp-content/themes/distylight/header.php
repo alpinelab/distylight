@@ -30,6 +30,3 @@
       'container'  => false
 	  )); ?>
 	</header>
-
-	<div class="container-fluid">
-		<div id="main" class="site-main row-fluid">
