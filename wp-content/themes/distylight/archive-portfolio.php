@@ -5,11 +5,15 @@
  * @package distylight
  */
 
+$term = get_term_by( 'slug', get_query_var('term'), get_query_var('taxonomy'));
+
 get_header(); ?>
 
 <div id="projects-grid" class="container">
   <?php
   $args = array('post_type' => 'portfolio', 'posts_per_page' => -1);
+  if ($term)
+    $args['portfolio-category'] = $term->slug;
   $posts = get_posts($args);
   $idx = 0;
   foreach ($posts as $post) {
