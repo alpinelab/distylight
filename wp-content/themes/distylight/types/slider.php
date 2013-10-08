@@ -58,15 +58,18 @@ function display_slider() {
   $args = array('post_type' => 'slider', 'numberposts' => 1);
   $slides = get_posts($args);
   if ($slides) {
-    $images = rwmb_meta('slider_gallery', 'type=image', $slides[0]->ID);
-    echo '<ul class="codrops-slideshow">';
-    foreach($images as $image) {
-      echo "<li>";
-      echo "  <span class=\"image-placeholder\" style=\"background-image: url('{$image['full_url']}')\">{$image['path']}</span>";
-      echo "  <div class=\"title\"><h3>{$image['title']}</h3></div>";
-      echo "</li>";
-    }
-    echo '</ul>';
+    $images = rwmb_meta('slider_gallery', 'type=image', $slides[0]->ID); ?>
+
+    <ul class="codrops-slideshow"> <?
+
+    foreach($images as $image) { ?>
+      <li>
+        <span class="image-placeholder" style="background-image: url('<?= $image['full_url'] ?>')">
+          <?= $image['path'] ?>
+        </span>
+      </li> <?php
+    } ?>
+    </ul> <?
   }
 }
 

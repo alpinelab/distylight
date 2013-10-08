@@ -54,7 +54,7 @@ function register_portfolio() {
     'has_archive' => true,
     'hierarchical' => false,
     'menu_position' => 5,
-    'supports' => array( 'title')
+    'supports' => array( 'title', 'thumbnail')
   );
 
   register_post_type( 'portfolio', $args );
