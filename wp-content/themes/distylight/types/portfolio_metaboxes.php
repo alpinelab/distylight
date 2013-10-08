@@ -80,7 +80,7 @@ $meta_boxes[] = array(
       // Field name - Will be used as label
       'name'  => __( "Puissance énergétique du projet", 'rwmb' ),
       // Field ID, i.e. the meta key
-      'id'    => "{$prefix}project_area",
+      'id'    => "{$prefix}project_power",
       // Field description (optional)
       'desc'  => __( 'Entrer la puissance énergétique du projet', 'rwmb' ),
       'type'  => 'text',
@@ -98,8 +98,8 @@ $meta_boxes[] = array(
 
       // jQuery date picker options. See here http://api.jqueryui.com/datepicker
       'js_options' => array(
-        'appendText'      => __( ' (ne seront affichés que le mois et l\'année)', 'rwmb' ),
-        'dateFormat'      => __( 'dd-mm-yy', 'rwmb' ),
+        'appendText'      => __( ' (dd-mm-yyyy)', 'rwmb' ),
+        'dateFormat'      => __( 'dd-mm-yyyy', 'rwmb' ),
         'changeMonth'     => true,
         'changeYear'      => true,
         'showButtonPanel' => true,
