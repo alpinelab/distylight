@@ -91,9 +91,9 @@ function create_portfolio_taxonomies()
         'show_ui'           => true,
         'show_admin_column' => true,
         'query_var'         => true,
-        'rewrite'           => array( 'slug' => 'portfolio_category' ),
+        'rewrite'           => array( 'slug' => 'portfolio-category' ),
     );
 
-    register_taxonomy( 'portfolio_category', array( 'portfolio' ), $args );
+    register_taxonomy( 'portfolio-category', array( 'portfolio' ), $args );
     }
 ?>
