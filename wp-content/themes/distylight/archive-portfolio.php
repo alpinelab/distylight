@@ -9,7 +9,7 @@ $term = get_term_by( 'slug', get_query_var('term'), get_query_var('taxonomy'));
 
 get_header(); ?>
 
-<div id="projects-grid" class="container">
+<div id="projects-grid">
   <?php
   $args = array('post_type' => 'portfolio', 'posts_per_page' => -1);
   if ($term)

@@ -30,3 +30,6 @@
       'container'  => false
 	  )); ?>
 	</header>
+
+	<div id="primary" class="content-area container">
+	  <div id="content" class="site-content" role="main">

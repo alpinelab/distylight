@@ -10,28 +10,24 @@
  * @package distylight
  */
 
-get_header(); ?>
+get_header();
 
-<div id="primary" class="container content-area">
-  <div id="content" class="site-content" role="main"> <?
+while ( have_posts() ) : the_post();
 
-    while ( have_posts() ) : the_post();
+  if (has_post_thumbnail()) {
+    $featured_image = wp_get_attachment_image_src(get_post_thumbnail_id(), 'slider-normal');
+    if ($featured_image)
+      $featured_image_url = $featured_image[0]; ?>
+    <div class="featured-image"
+         style="background-image: url('<?= $featured_image_url ?>');"
+         alt="<?= get_the_title() ?>">
+    </div> <?
+  }
 
-      if (has_post_thumbnail()) {
-        $featured_image = wp_get_attachment_image_src(get_post_thumbnail_id(), 'slider-normal');
-        if ($featured_image)
-          $featured_image_url = $featured_image[0]; ?>
-        <div class="featured-image"
-             style="background-image: url('<?= $featured_image_url ?>');"
-             alt="<?= get_the_title() ?>">
-        </div> <?
-      }
+  get_template_part( 'content', 'page' );
 
-      get_template_part( 'content', 'page' );
+endwhile; // end of the loop.
 
-    endwhile; // end of the loop. ?>
+get_footer();
 
-  </div><!-- #content -->
-</div><!-- #primary -->
-
-<?php get_footer(); ?>
+?>
