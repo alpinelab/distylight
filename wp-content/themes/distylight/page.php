@@ -12,22 +12,26 @@
 
 get_header(); ?>
 
-  <div id="primary" class="content-area">
-    <div id="content" class="site-content" role="main">
+<div id="primary" class="container content-area">
+  <div id="content" class="site-content" role="main"> <?
 
-      <?php while ( have_posts() ) : the_post(); ?>
+    while ( have_posts() ) : the_post();
 
-        <?php get_template_part( 'content', 'page' ); ?>
+      if (has_post_thumbnail()) {
+        $featured_image = wp_get_attachment_image_src(get_post_thumbnail_id(), 'slider-normal');
+        if ($featured_image)
+          $featured_image_url = $featured_image[0]; ?>
+        <div class="featured-image"
+             style="background-image: url('<?= $featured_image_url ?>');"
+             alt="<?= get_the_title() ?>">
+        </div> <?
+      }
 
-        <?php
-          // If comments are open or we have at least one comment, load up the comment template
-          if ( comments_open() || '0' != get_comments_number() )
-            comments_template();
-        ?>
+      get_template_part( 'content', 'page' );
 
-      <?php endwhile; // end of the loop. ?>
+    endwhile; // end of the loop. ?>
 
-    </div><!-- #content -->
-  </div><!-- #primary -->
+  </div><!-- #content -->
+</div><!-- #primary -->
 
 <?php get_footer(); ?>
