@@ -26,6 +26,13 @@
   width: -o-#{$value}
   width: #{$value}
 
+@mixin box-sizing($box-sizing)
+  -webkit-box-sizing: $box-sizing
+  -moz-box-sizing: $box-sizing
+  -ms-box-sizing: $box-sizing
+  -o-box-sizing: $box-sizing
+  box-sizing: $box-sizing
+
 @mixin keyframes($name)
   @-webkit-keyframes #{$name}
     @content
