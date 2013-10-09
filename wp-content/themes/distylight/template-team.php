@@ -8,6 +8,8 @@
  * different template.
  *
  * @package distylight
+ *
+ * Template Name: Team
  */
 
 $team = array(
