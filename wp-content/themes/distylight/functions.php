@@ -136,6 +136,27 @@ add_filter( 'show_admin_bar', '__return_false' );
 //require get_template_directory() . '/inc/custom-header.php';
 
 /**
+ * Functions used on the team page to find team members avatars
+ */
+function get_team_member_avatar_url($slug, $size) {
+  $attachments = get_posts(array(
+    'post_type' => 'attachment',
+    'numberposts' => -1,
+    'post_mime_type' => 'image',
+    'name' => 'team-'.$slug
+  ));
+  $avatar = array_shift($attachments);
+  return $avatar ? wp_get_attachment_image_src($avatar->ID, $size) : '';
+}
+
+function the_team_member_avatar($slug) {
+  $image = get_team_member_avatar_url($slug, 'thumbnail');
+  echo "<img src=\"{$image[0]}\" width=\"{$image[1]}\" height=\"{$image[2]}\">";
+}
+
+
+
+/**
  * Custom template tags for this theme.
  */
 require get_template_directory() . '/inc/template-tags.php';
