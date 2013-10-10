@@ -10,18 +10,20 @@ body
 header.navigation
   position: fixed
   width: 100%
-  font-size: 1em
-  top: 80%
+  font-size: 1.5em
+  top: 75%
   left: 0
   z-index: 200
   background-color: rgba(0,0,0,0.8)
   padding: 1em
+  font-family: misolight, Arial, sans-serif
+
   .brand
     float: left
     display: block
     img
       width: 80%
-      margin: 1em
+      margin: 0.7em
   .menu, .sub-menu
     margin: 0
     list-style: none
@@ -66,17 +68,18 @@ header.navigation
     display: none
     margin-right: 4em
     left: 50%
-    font-size: 0.6em
+    font-size: 0.8em
     position: absolute
     width: 100em // this is a fallback dirty value for what's next
     +width(max-content)
     z-index: 300
+    top: 35%
     &:hover
       display: block
     .menu-item
       height: auto
     a
-      line-height: 3em
+      line-height: 1em
 
 // This is a dirty exception to display sub-menu on a portfolio single pages
 .single-portfolio

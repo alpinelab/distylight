@@ -15,19 +15,19 @@
 
   <div class="row project-infos">
     <div class="span3">
-      <div>Location</div>
+      <div class="info-title">Location</div>
       <h4><?= rwmb_meta( 'portfolio_project_location' ) ?></h4>
     </div>
     <div class="span3">
-      <div>Date</div>
+      <div class="info-title">Date</div>
       <h4><?= rwmb_meta( 'portfolio_project_date' ) ?></h4>
     </div>
     <div class="span3">
-      <div>Architect</div>
+      <div class="info-title">Architect</div>
       <h4><?= rwmb_meta( 'portfolio_project_client' ) ?></h4>
     </div>
     <div class="span3">
-      <div>Power</div>
+      <div class="info-title">Power</div>
       <h4><?= rwmb_meta( 'portfolio_project_power' ) ?></h4>
     </div>
   </div>
