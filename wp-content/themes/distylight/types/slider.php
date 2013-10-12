@@ -64,9 +64,7 @@ function display_slider() {
 
     foreach($images as $image) { ?>
       <li>
-        <span class="image-placeholder" style="background-image: url('<?= $image['full_url'] ?>')">
-          <?= $image['path'] ?>
-        </span>
+        <span class="image-placeholder" style="background-image: url('<?= $image['full_url'] ?>')"></span>
       </li> <?
     } ?>
     </ul> <?
