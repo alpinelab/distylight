@@ -1,4 +1,4 @@
-<?php
+<?
 /**
  * The template for displaying Comments.
  *
@@ -21,26 +21,26 @@ if ( post_password_required() )
 
 	<div id="comments" class="comments-area">
 
-	<?php // You can start editing here -- including this comment! ?>
+	<? // You can start editing here -- including this comment! ?>
 
-	<?php if ( have_comments() ) : ?>
+	<? if ( have_comments() ) : ?>
 		<h2 class="comments-title">
-			<?php
+			<?
 				printf( _nx( 'One thought on &ldquo;%2$s&rdquo;', '%1$s thoughts on &ldquo;%2$s&rdquo;', get_comments_number(), 'comments title', 'distylight' ),
 					number_format_i18n( get_comments_number() ), '<span>' . get_the_title() . '</span>' );
 			?>
 		</h2>
 
-		<?php if ( get_comment_pages_count() > 1 && get_option( 'page_comments' ) ) : // are there comments to navigate through ?>
+		<? if ( get_comment_pages_count() > 1 && get_option( 'page_comments' ) ) : // are there comments to navigate through ?>
 		<nav id="comment-nav-above" class="navigation-comment" role="navigation">
-			<h1 class="screen-reader-text"><?php _e( 'Comment navigation', 'distylight' ); ?></h1>
-			<div class="nav-previous"><?php previous_comments_link( __( '&larr; Older Comments', 'distylight' ) ); ?></div>
-			<div class="nav-next"><?php next_comments_link( __( 'Newer Comments &rarr;', 'distylight' ) ); ?></div>
+			<h1 class="screen-reader-text"><? _e( 'Comment navigation', 'distylight' ); ?></h1>
+			<div class="nav-previous"><? previous_comments_link( __( '&larr; Older Comments', 'distylight' ) ); ?></div>
+			<div class="nav-next"><? next_comments_link( __( 'Newer Comments &rarr;', 'distylight' ) ); ?></div>
 		</nav><!-- #comment-nav-above -->
-		<?php endif; // check for comment navigation ?>
+		<? endif; // check for comment navigation ?>
 
 		<ol class="comment-list">
-			<?php
+			<?
 				/* Loop through and list the comments. Tell wp_list_comments()
 				 * to use distylight_comment() to format the comments.
 				 * If you want to overload this in a child theme then you can
@@ -51,23 +51,23 @@ if ( post_password_required() )
 			?>
 		</ol><!-- .comment-list -->
 
-		<?php if ( get_comment_pages_count() > 1 && get_option( 'page_comments' ) ) : // are there comments to navigate through ?>
+		<? if ( get_comment_pages_count() > 1 && get_option( 'page_comments' ) ) : // are there comments to navigate through ?>
 		<nav id="comment-nav-below" class="navigation-comment" role="navigation">
-			<h1 class="screen-reader-text"><?php _e( 'Comment navigation', 'distylight' ); ?></h1>
-			<div class="nav-previous"><?php previous_comments_link( __( '&larr; Older Comments', 'distylight' ) ); ?></div>
-			<div class="nav-next"><?php next_comments_link( __( 'Newer Comments &rarr;', 'distylight' ) ); ?></div>
+			<h1 class="screen-reader-text"><? _e( 'Comment navigation', 'distylight' ); ?></h1>
+			<div class="nav-previous"><? previous_comments_link( __( '&larr; Older Comments', 'distylight' ) ); ?></div>
+			<div class="nav-next"><? next_comments_link( __( 'Newer Comments &rarr;', 'distylight' ) ); ?></div>
 		</nav><!-- #comment-nav-below -->
-		<?php endif; // check for comment navigation ?>
+		<? endif; // check for comment navigation ?>
 
-	<?php endif; // have_comments() ?>
+	<? endif; // have_comments() ?>
 
-	<?php
+	<?
 		// If comments are closed and there are comments, let's leave a little note, shall we?
 		if ( ! comments_open() && '0' != get_comments_number() && post_type_supports( get_post_type(), 'comments' ) ) :
 	?>
-		<p class="no-comments"><?php _e( 'Comments are closed.', 'distylight' ); ?></p>
-	<?php endif; ?>
+		<p class="no-comments"><? _e( 'Comments are closed.', 'distylight' ); ?></p>
+	<? endif; ?>
 
-	<?php comment_form(); ?>
+	<? comment_form(); ?>
 
 </div><!-- #comments -->

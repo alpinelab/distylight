@@ -1,4 +1,4 @@
-<?php
+<?
 
 /**
 * POUR APPELER LE CUSTOM POST TYPE PORTFOLIO

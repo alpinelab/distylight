@@ -1,4 +1,4 @@
-<?php
+<?
 /**
  * Registering meta boxes
  *

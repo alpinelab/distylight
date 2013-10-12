@@ -1,4 +1,4 @@
-<?php
+<?
 /**
  * The template used for displaying page content in page.php
  *
@@ -6,15 +6,15 @@
  */
 ?>
 
-<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
+<article id="post-<? the_ID(); ?>" <? post_class(); ?>>
 	<div class="entry-content">
-		<?php the_content(); ?>
-		<?php
+		<? the_content(); ?>
+		<?
 			wp_link_pages( array(
 				'before' => '<div class="page-links">' . __( 'Pages:', 'distylight' ),
 				'after'  => '</div>',
 			) );
 		?>
 	</div><!-- .entry-content -->
-	<?php edit_post_link( __( 'Edit', 'distylight' ), '<footer class="entry-meta"><span class="edit-link">', '</span></footer>' ); ?>
+	<? edit_post_link( __( 'Edit', 'distylight' ), '<footer class="entry-meta"><span class="edit-link">', '</span></footer>' ); ?>
 </article><!-- #post-## -->

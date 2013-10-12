@@ -1,4 +1,4 @@
-<?php
+<?
 
 add_action('manage_edit-portfolio_columns', 'portfolio_column_filter');
 add_action('manage_posts_custom_column', 'portfolio_column');

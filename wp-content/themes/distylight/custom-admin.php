@@ -1,4 +1,4 @@
-<?php
+<?
 /**
  * Checks if a particular user has a role.
  * Returns true if a match was found.

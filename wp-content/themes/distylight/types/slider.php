@@ -1,4 +1,4 @@
-<?php
+<?
 
 add_action('manage_edit-slider_columns', 'slider_column_filter');
 add_action('manage_posts_custom_column', 'slider_column');
@@ -67,7 +67,7 @@ function display_slider() {
         <span class="image-placeholder" style="background-image: url('<?= $image['full_url'] ?>')">
           <?= $image['path'] ?>
         </span>
-      </li> <?php
+      </li> <?
     } ?>
     </ul> <?
   }

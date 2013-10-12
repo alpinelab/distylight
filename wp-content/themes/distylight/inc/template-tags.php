@@ -1,4 +1,4 @@
-<?php
+<?
 /**
  * Custom template tags for this theme.
  *
@@ -30,28 +30,28 @@ function distylight_content_nav( $nav_id ) {
 	$nav_class = ( is_single() ) ? 'navigation-post' : 'navigation-paging';
 
 	?>
-	<nav role="navigation" id="<?php echo esc_attr( $nav_id ); ?>" class="<?php echo $nav_class; ?>">
-		<h1 class="screen-reader-text"><?php _e( 'Post navigation', 'distylight' ); ?></h1>
+	<nav role="navigation" id="<? echo esc_attr( $nav_id ); ?>" class="<? echo $nav_class; ?>">
+		<h1 class="screen-reader-text"><? _e( 'Post navigation', 'distylight' ); ?></h1>
 
-	<?php if ( is_single() ) : // navigation links for single posts ?>
+	<? if ( is_single() ) : // navigation links for single posts ?>
 
-		<?php previous_post_link( '<div class="nav-previous">%link</div>', '<span class="meta-nav">' . _x( '&larr;', 'Previous post link', 'distylight' ) . '</span> %title' ); ?>
-		<?php next_post_link( '<div class="nav-next">%link</div>', '%title <span class="meta-nav">' . _x( '&rarr;', 'Next post link', 'distylight' ) . '</span>' ); ?>
+		<? previous_post_link( '<div class="nav-previous">%link</div>', '<span class="meta-nav">' . _x( '&larr;', 'Previous post link', 'distylight' ) . '</span> %title' ); ?>
+		<? next_post_link( '<div class="nav-next">%link</div>', '%title <span class="meta-nav">' . _x( '&rarr;', 'Next post link', 'distylight' ) . '</span>' ); ?>
 
-	<?php elseif ( $wp_query->max_num_pages > 1 && ( is_home() || is_archive() || is_search() ) ) : // navigation links for home, archive, and search pages ?>
+	<? elseif ( $wp_query->max_num_pages > 1 && ( is_home() || is_archive() || is_search() ) ) : // navigation links for home, archive, and search pages ?>
 
-		<?php if ( get_next_posts_link() ) : ?>
-		<div class="nav-previous"><?php next_posts_link( __( '<span class="meta-nav">&larr;</span> Older posts', 'distylight' ) ); ?></div>
-		<?php endif; ?>
+		<? if ( get_next_posts_link() ) : ?>
+		<div class="nav-previous"><? next_posts_link( __( '<span class="meta-nav">&larr;</span> Older posts', 'distylight' ) ); ?></div>
+		<? endif; ?>
 
-		<?php if ( get_previous_posts_link() ) : ?>
-		<div class="nav-next"><?php previous_posts_link( __( 'Newer posts <span class="meta-nav">&rarr;</span>', 'distylight' ) ); ?></div>
-		<?php endif; ?>
+		<? if ( get_previous_posts_link() ) : ?>
+		<div class="nav-next"><? previous_posts_link( __( 'Newer posts <span class="meta-nav">&rarr;</span>', 'distylight' ) ); ?></div>
+		<? endif; ?>
 
-	<?php endif; ?>
+	<? endif; ?>
 
-	</nav><!-- #<?php echo esc_html( $nav_id ); ?> -->
-	<?php
+	</nav><!-- #<? echo esc_html( $nav_id ); ?> -->
+	<?
 }
 endif; // distylight_content_nav
 
@@ -66,45 +66,45 @@ function distylight_comment( $comment, $args, $depth ) {
 
 	if ( 'pingback' == $comment->comment_type || 'trackback' == $comment->comment_type ) : ?>
 
-	<li id="comment-<?php comment_ID(); ?>" <?php comment_class(); ?>>
+	<li id="comment-<? comment_ID(); ?>" <? comment_class(); ?>>
 		<div class="comment-body">
-			<?php _e( 'Pingback:', 'distylight' ); ?> <?php comment_author_link(); ?> <?php edit_comment_link( __( 'Edit', 'distylight' ), '<span class="edit-link">', '</span>' ); ?>
+			<? _e( 'Pingback:', 'distylight' ); ?> <? comment_author_link(); ?> <? edit_comment_link( __( 'Edit', 'distylight' ), '<span class="edit-link">', '</span>' ); ?>
 		</div>
 
-	<?php else : ?>
+	<? else : ?>
 
-	<li id="comment-<?php comment_ID(); ?>" <?php comment_class( empty( $args['has_children'] ) ? '' : 'parent' ); ?>>
-		<article id="div-comment-<?php comment_ID(); ?>" class="comment-body">
+	<li id="comment-<? comment_ID(); ?>" <? comment_class( empty( $args['has_children'] ) ? '' : 'parent' ); ?>>
+		<article id="div-comment-<? comment_ID(); ?>" class="comment-body">
 			<footer class="comment-meta">
 				<div class="comment-author vcard">
-					<?php if ( 0 != $args['avatar_size'] ) echo get_avatar( $comment, $args['avatar_size'] ); ?>
-					<?php printf( __( '%s <span class="says">says:</span>', 'distylight' ), sprintf( '<cite class="fn">%s</cite>', get_comment_author_link() ) ); ?>
+					<? if ( 0 != $args['avatar_size'] ) echo get_avatar( $comment, $args['avatar_size'] ); ?>
+					<? printf( __( '%s <span class="says">says:</span>', 'distylight' ), sprintf( '<cite class="fn">%s</cite>', get_comment_author_link() ) ); ?>
 				</div><!-- .comment-author -->
 
 				<div class="comment-metadata">
-					<a href="<?php echo esc_url( get_comment_link( $comment->comment_ID ) ); ?>">
-						<time datetime="<?php comment_time( 'c' ); ?>">
-							<?php printf( _x( '%1$s at %2$s', '1: date, 2: time', 'distylight' ), get_comment_date(), get_comment_time() ); ?>
+					<a href="<? echo esc_url( get_comment_link( $comment->comment_ID ) ); ?>">
+						<time datetime="<? comment_time( 'c' ); ?>">
+							<? printf( _x( '%1$s at %2$s', '1: date, 2: time', 'distylight' ), get_comment_date(), get_comment_time() ); ?>
 						</time>
 					</a>
-					<?php edit_comment_link( __( 'Edit', 'distylight' ), '<span class="edit-link">', '</span>' ); ?>
+					<? edit_comment_link( __( 'Edit', 'distylight' ), '<span class="edit-link">', '</span>' ); ?>
 				</div><!-- .comment-metadata -->
 
-				<?php if ( '0' == $comment->comment_approved ) : ?>
-				<p class="comment-awaiting-moderation"><?php _e( 'Your comment is awaiting moderation.', 'distylight' ); ?></p>
-				<?php endif; ?>
+				<? if ( '0' == $comment->comment_approved ) : ?>
+				<p class="comment-awaiting-moderation"><? _e( 'Your comment is awaiting moderation.', 'distylight' ); ?></p>
+				<? endif; ?>
 			</footer><!-- .comment-meta -->
 
 			<div class="comment-content">
-				<?php comment_text(); ?>
+				<? comment_text(); ?>
 			</div><!-- .comment-content -->
 
 			<div class="reply">
-				<?php comment_reply_link( array_merge( $args, array( 'add_below' => 'div-comment', 'depth' => $depth, 'max_depth' => $args['max_depth'] ) ) ); ?>
+				<? comment_reply_link( array_merge( $args, array( 'add_below' => 'div-comment', 'depth' => $depth, 'max_depth' => $args['max_depth'] ) ) ); ?>
 			</div><!-- .reply -->
 		</article><!-- .comment-body -->
 
-	<?php
+	<?
 	endif;
 }
 endif; // ends check for distylight_comment()

@@ -1,21 +1,21 @@
-<?php
+<?
 /**
  * @package distylight
  */
 ?>
 
-<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
+<article id="post-<? the_ID(); ?>" <? post_class(); ?>>
 	<header class="entry-header">
-		<h1 class="entry-title"><?php the_title(); ?></h1>
+		<h1 class="entry-title"><? the_title(); ?></h1>
 
 		<div class="entry-meta">
-			<?php distylight_posted_on(); ?>
+			<? distylight_posted_on(); ?>
 		</div><!-- .entry-meta -->
 	</header><!-- .entry-header -->
 
 	<div class="entry-content">
-		<?php the_content(); ?>
-		<?php
+		<? the_content(); ?>
+		<?
 			wp_link_pages( array(
 				'before' => '<div class="page-links">' . __( 'Pages:', 'distylight' ),
 				'after'  => '</div>',
@@ -24,7 +24,7 @@
 	</div><!-- .entry-content -->
 
 	<footer class="entry-meta">
-		<?php
+		<?
 			/* translators: used between list items, there is a space after the comma */
 			$category_list = get_the_category_list( __( ', ', 'distylight' ) );
 
@@ -58,6 +58,6 @@
 			);
 		?>
 
-		<?php edit_post_link( __( 'Edit', 'distylight' ), '<span class="edit-link">', '</span>' ); ?>
+		<? edit_post_link( __( 'Edit', 'distylight' ), '<span class="edit-link">', '</span>' ); ?>
 	</footer><!-- .entry-meta -->
 </article><!-- #post-## -->
