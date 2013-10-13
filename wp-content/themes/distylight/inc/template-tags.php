@@ -31,12 +31,11 @@ function distylight_content_nav( $nav_id ) {
 
 	?>
 	<nav role="navigation" id="<? echo esc_attr( $nav_id ); ?>" class="<? echo $nav_class; ?>">
-		<h1 class="screen-reader-text"><? _e( 'Post navigation', 'distylight' ); ?></h1>
 
 	<? if ( is_single() ) : // navigation links for single posts ?>
 
-		<? previous_post_link( '<div class="nav-previous">%link</div>', '<span class="meta-nav">' . _x( '&larr;', 'Previous post link', 'distylight' ) . '</span> %title' ); ?>
-		<? next_post_link( '<div class="nav-next">%link</div>', '%title <span class="meta-nav">' . _x( '&rarr;', 'Next post link', 'distylight' ) . '</span>' ); ?>
+		<? previous_post_link( '<div class="nav-previous">%link</div>', '<span class="meta-nav">' . _x( '&larr;', 'Previous post link', 'distylight' ) . '</span>' ); ?>
+		<? next_post_link( '<div class="nav-next">%link</div>', '<span class="meta-nav">' . _x( '&rarr;', 'Next post link', 'distylight' ) . '</span>' ); ?>
 
 	<? elseif ( $wp_query->max_num_pages > 1 && ( is_home() || is_archive() || is_search() ) ) : // navigation links for home, archive, and search pages ?>
 
