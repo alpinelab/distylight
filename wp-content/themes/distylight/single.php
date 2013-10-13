@@ -7,25 +7,32 @@
 
 get_header(); ?>
 
-	<div id="primary" class="content-area span8">
-		<div id="content" class="site-content" role="main">
+  <? while (have_posts()) : the_post();
 
-		<? while ( have_posts() ) : the_post(); ?>
+    if (has_post_thumbnail()) {
+      $featured_image = wp_get_attachment_image_src(get_post_thumbnail_id(), 'slider-normal');
+      if ($featured_image)
+        $featured_image_url = $featured_image[0]; ?>
+      <div class="featured-image"
+           style="background-image: url('<?= $featured_image_url ?>');"
+           alt="<?= get_the_title() ?>">
+      </div> <?
+    } ?>
 
-			<? get_template_part( 'content', 'single' ); ?>
+    <div class="row">
+      <div id="primary" class="content-area span8">
+        <div id="content" class="site-content" role="main"> <?
+          get_template_part('content');
+          distylight_content_nav( 'nav-below' ); ?>
+        </div>
+      </div>
+    </div> <?
+  endwhile; ?>
 
-			<? distylight_content_nav( 'nav-below' ); ?>
+  <div class="span4"> <?
+    get_sidebar(); ?>
+  </div>
 
-			<?
-				// If comments are open or we have at least one comment, load up the comment template
-				if ( comments_open() || '0' != get_comments_number() )
-					comments_template();
-			?>
+</div><!-- .row --> <?
 
-		<? endwhile; // end of the loop. ?>
-
-		</div><!-- #content -->
-	</div><!-- #primary -->
-
-<? get_sidebar(); ?>
-<? get_footer(); ?>
+get_footer(); ?>
