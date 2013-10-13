@@ -86,3 +86,33 @@ header.navigation
   header.navigation
     .sub-menu
       display: block
+
+// This is another dirty hack to mark blog menu entry as hightlighted when on a single post
+.single-post
+  header.navigation
+    .menu-item.current_page_parent
+      & > a
+        color: $dlYellow
+        &::before
+          +opacity(100)
+
+// Display Blog logo
+.single-post, .blog
+  header.navigation
+    .brand
+      float: left
+      display: block
+      &:hover
+        text-decoration: none
+      img
+        width: 30%
+        margin: 0.7em
+        position: relative
+        top: 0.75em
+      &:before
+        content: 'BLOG'
+        color: white
+        font-size: 4em
+        position: relative
+        top: 0.25em
+        font-family: serif

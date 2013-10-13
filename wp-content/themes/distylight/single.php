@@ -5,9 +5,9 @@
  * @package distylight
  */
 
-get_header(); ?>
+get_header();
 
-  <? while (have_posts()) : the_post();
+  while (have_posts()) : the_post();
 
     if (has_post_thumbnail()) {
       $featured_image = wp_get_attachment_image_src(get_post_thumbnail_id(), 'slider-normal');
@@ -20,18 +20,15 @@ get_header(); ?>
     } ?>
 
     <div class="row">
-      <div id="primary" class="content-area span8">
-        <div id="content" class="site-content" role="main"> <?
-          get_template_part('content');
-          distylight_content_nav( 'nav-below' ); ?>
-        </div>
+      <div class="span8"> <?
+        distylight_content_nav('nav-below');
+        get_template_part('content'); ?>
+      </div>
+      <div class="span4"> <?
+        get_sidebar(); ?>
       </div>
     </div> <?
   endwhile; ?>
-
-  <div class="span4"> <?
-    get_sidebar(); ?>
-  </div>
 
 </div><!-- .row --> <?
 
