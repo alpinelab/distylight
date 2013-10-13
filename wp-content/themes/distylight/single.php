@@ -20,11 +20,11 @@ get_header();
     } ?>
 
     <div class="row">
-      <div class="span8"> <?
+      <div class="span9"> <?
         distylight_content_nav('nav-below');
         get_template_part('content'); ?>
       </div>
-      <div class="span4"> <?
+      <div class="span3"> <?
         get_sidebar(); ?>
       </div>
     </div> <?
