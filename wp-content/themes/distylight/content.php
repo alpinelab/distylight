@@ -7,12 +7,6 @@
 <article id="post-<? the_ID(); ?>" <? post_class(); ?>>
 	<header class="entry-header">
 		<h1 class="entry-title"><a href="<? the_permalink(); ?>" rel="bookmark"><? the_title(); ?></a></h1>
-
-		<? if ( 'post' == get_post_type() ) : ?>
-		<div class="entry-meta">
-			<? distylight_posted_on(); ?>
-		</div><!-- .entry-meta -->
-		<? endif; ?>
 	</header><!-- .entry-header -->
 
 	<? if ( is_search() ) : // Only display Excerpts for Search ?>
@@ -33,6 +27,9 @@
 
 	<footer class="entry-meta">
 		<? if ( 'post' == get_post_type() ) : // Hide category and tag text for pages on Search ?>
+			<div class="entry-meta">
+				<? distylight_posted_on(); ?>
+			</div><!-- .entry-meta -->
 			<?
 				/* translators: used between list items, there is a space after the comma */
 				$categories_list = get_the_category_list( __( ', ', 'distylight' ) );
