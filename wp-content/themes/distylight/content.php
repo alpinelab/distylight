@@ -13,7 +13,7 @@
             the_post_thumbnail('portfolio-thumbnail') ?>
           </a>
         </div>
-        <div class="span7">
+        <div class="span6">
           <header class="entry-header">
             <h4 class="entry-title"><a href="<? the_permalink() ?>" rel="bookmark"><? the_title() ?></a></h4>
           </header><!-- .entry-header -->
