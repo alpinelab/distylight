@@ -19,7 +19,7 @@ get_header(); ?>
 
 <div class="row download-portfolio">
   <div class="span12">
-    <a href="<? the_portfolio_url() ?>">Our Portfolio <i class="icon-circle-arrow-down"></i></a>
+    <a href="<? the_portfolio_url() ?>">Our Portfolio <i class="icon-download"></i></a>
   </div>
 </div>
 
