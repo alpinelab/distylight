@@ -20,8 +20,11 @@
 
 <body <? body_class(); ?>>
 	<? do_action( 'before' ); ?>
-	<header class="navigation" role="banner">
-		<a class="brand" href="<? echo esc_url( home_url( '/' ) ); ?>" title="<? echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>" rel="home">
+	<header class="navigation" role="banner"> <?
+		if (is_home() || is_single()) { ?>
+			<a class="blog" href="<?= esc_url(home_url('/blog')) ?>" rel="blog">BLOG</a> <?
+		} ?>
+		<a class="brand" href="<? echo esc_url( home_url( '/' ) ); ?>" rel="home">
 			<img src="<? bloginfo('template_directory') ?>/images/logo.svg" alt="<? bloginfo( 'name' ); ?>" />
 		</a>
 
