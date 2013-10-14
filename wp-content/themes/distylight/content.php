@@ -23,10 +23,12 @@
         </div>
       </div>
     </div><!-- .entry-summary --> <?
-  else : ?>
-    <header class="entry-header">
-      <h1 class="entry-title"><a href="<? the_permalink() ?>" rel="bookmark"><? the_title() ?></a></h1>
-    </header><!-- .entry-header -->
+  else :
+    if (!is_page()) { ?>
+      <header class="entry-header">
+        <h1 class="entry-title"><a href="<? the_permalink() ?>" rel="bookmark"><? the_title() ?></a></h1>
+      </header><!-- .entry-header --> <?
+    } ?>
     <div class="entry-content"> <?
       the_content(__( 'Continue reading <span class="meta-nav">&rarr;</span>', 'distylight' )); ?>
     </div><!-- .entry-content --> <?
