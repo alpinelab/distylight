@@ -1,0 +1,42 @@
+#projects-grid
+  .row, .row-fluid
+    margin-bottom: $gridGutterWidth
+    .span3
+      position: relative
+      &:not(:hover)::after
+        content: ''
+        position: absolute
+        width: 100%
+        height: 100%
+        top: 0
+        left: 0
+        background-color: rgba(0,0,0,0.3)
+
+.single-portfolio
+  color: white
+  h1
+    font-size: 2em
+    font-weight: normal
+    text-transform: uppercase
+  .info-title
+    font-style: italic
+  h4
+    margin: 0
+  .project-infos
+    margin-top: 1em
+  .project-description
+    margin-top: 2em
+    font-size: 1.15em
+  .project-image
+    margin-top: 1em
+
+.projects-navigation
+  font-size: 4em
+  a, a:hover
+    text-decoration: none
+    color: white
+  a:hover
+    color: $dlYellow
+    font-weight: bold
+  div:last-child a
+    float: right

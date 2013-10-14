@@ -1,0 +1,7 @@
+.ruby-version
+.ruby-gemset
+.sass-cache
+.DS_Store
+/wp-config.php
+.htaccess
+/wp-content/uploads/

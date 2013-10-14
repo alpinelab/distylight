@@ -1,0 +1,97 @@
+@import bootstrap/mixins
+
+body
+  background-color: black
+  padding-bottom: 15%
+
+.container
+  padding: 0
+
+header.navigation
+  position: fixed
+  width: 100%
+  font-size: 1.5em
+  top: 75%
+  left: 0
+  z-index: 200
+  background-color: rgba(0,0,0,0.8)
+  padding: 1em
+  font-family: misolight, Arial, sans-serif
+
+  .brand
+    float: left
+    display: block
+    img
+      width: 80%
+      margin: 0.7em
+  .menu, .sub-menu
+    margin: 0
+    list-style: none
+    position: absolute
+    right: 0
+    top: 40%
+    .menu-item
+      margin: 0
+      margin-right: 3em
+      padding: 0
+      float: left
+      height: 5em
+      position: relative
+      a
+        color: white
+        font-size: 1.5em
+        position: relative
+        text-decoration: none
+        &:hover
+          color: $dlYellow
+        &::before
+          content: ''
+          position: absolute
+          width: 0.6em
+          height: 0.6em
+          background-image: url('/wp-content/themes/distylight/images/star.svg')
+          background-size: 100%
+          left: -0.7em
+          top: -0.2em
+          +opacity(0)
+      &.current-menu-item, &.current-menu-parent
+        & > a
+          color: $dlYellow
+          &::before
+            +opacity(100)
+
+      &:hover, &.current-menu-ancestor
+        .sub-menu
+          display: block
+
+  .sub-menu
+    display: none
+    margin-right: 4em
+    left: 50%
+    font-size: 0.8em
+    position: absolute
+    width: 100em // this is a fallback dirty value for what's next
+    +width(max-content)
+    z-index: 300
+    top: 35%
+    &:hover
+      display: block
+    .menu-item
+      height: auto
+    a
+      line-height: 1em
+
+// This is a dirty exception to display sub-menu on a portfolio single pages
+.single-portfolio
+  header.navigation
+    .sub-menu
+      display: block
+
+// This is another dirty hack to mark blog menu entry as hightlighted when on a single post
+.single-post
+  header.navigation
+    .menu-item.current_page_parent
+      & > a
+        color: $dlYellow
+        &::before
+          +opacity(100)
