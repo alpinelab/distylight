@@ -5,7 +5,7 @@
  * @package distylight
  */
 
-do_action( 'before_sidebar' );
-dynamic_sidebar( 'blog-sidebar' );
+do_action('before_sidebar');
+dynamic_sidebar('blog-sidebar');
 
 ?>
