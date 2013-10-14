@@ -1,0 +1,68 @@
+@import variables
+
+.single-post, .blog
+  a
+    color: $dlYellow
+    text-decoration: none
+  header.navigation
+    top: 2em
+    padding: 1.5em
+    padding-left: 2.5em
+    .brand
+      float: left
+      display: block
+      &:hover
+        text-decoration: none
+      img
+        width: 30%
+        margin: 0 0 0 0.7em
+        position: relative
+        bottom: -1.2em
+    .blog
+      float: left
+      line-height: 0.5em
+      color: white
+      font-size: 4em
+      font-family: misolight
+
+  #primary
+    position: relative
+    top: 10em
+    .span9
+      border-right: solid 2px $dlYellow
+      margin-right: -2px
+      padding-right: 2em
+      +box-sizing(border-box)
+  .featured-image
+    width: 100%
+    background-repeat: no-repeat
+    background-position: center
+    background-size: cover
+    margin-bottom: 3em
+
+.single-post
+  .navigation-post
+    font-size: 3em
+    height: 1em
+    .nav-next
+      float: right
+    .nav-previous
+      float: left
+  .featured-image
+    height: $blogSingleFeaturedImageHeight
+  .post
+    .entry-content
+      font-size: 1.2em
+      line-height: 1.5em
+  aside.widget_recent_entries
+    margin-top: 7em
+
+.blog
+  .post
+    margin-bottom: 2em
+    .featured-image
+      display: block
+      height: $blogArchiveFeaturedImageHeight
+      margin-bottom: 1em
+    .entry-header, .entry-header h4, .entry-content, .entry-content p
+      display: inline

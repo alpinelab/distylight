@@ -62,11 +62,6 @@ function distylight_setup() {
 	) );
 
 	/**
-	 * Enable support for Post Formats
-	 */
-	add_theme_support( 'post-formats', array( 'aside', 'image', 'video', 'quote', 'link' ) );
-
-	/**
 	 * Setup the WordPress core custom background feature.
 	 */
 	add_theme_support( 'custom-background', apply_filters( 'distylight_custom_background_args', array(
@@ -82,12 +77,12 @@ add_action( 'after_setup_theme', 'distylight_setup' );
  */
 function distylight_widgets_init() {
 	register_sidebar( array(
-		'name'          => __( 'Sidebar', 'distylight' ),
-		'id'            => 'sidebar-1',
+		'name'          => __( 'Sidebar (blog)', 'distylight' ),
+		'id'            => 'blog-sidebar',
 		'before_widget' => '<aside id="%1$s" class="widget %2$s">',
 		'after_widget'  => '</aside>',
 		'before_title'  => '<h1 class="widget-title">',
-		'after_title'   => '</h1>',
+		'after_title'   => '</h1>'
 	) );
 }
 add_action( 'widgets_init', 'distylight_widgets_init' );
