@@ -149,6 +149,15 @@ function the_team_member_avatar($slug) {
   echo "<img src=\"{$image[0]}\" width=\"{$image[1]}\" height=\"{$image[2]}\">";
 }
 
+function the_portfolio_url() {
+  $attachments = get_posts(array(
+    'post_type' => 'attachment',
+    'numberposts' => -1,
+    'name' => 'portfolio'
+  ));
+  $portfolio = array_shift($attachments);
+  echo $portfolio ? wp_get_attachment_url($portfolio->ID) : 'ERROR';
+}
 
 
 /**
