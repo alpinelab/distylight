@@ -21,7 +21,7 @@
 <body <? body_class(); ?>>
 	<? do_action( 'before' ); ?>
 	<header class="navigation" role="banner"> <?
-		if (is_home() || is_single()) { ?>
+		if (is_home() || is_singular('post')) { ?>
 			<a class="blog" href="<?= esc_url(home_url('/blog')) ?>" rel="blog">BLOG</a> <?
 		} ?>
 		<a class="brand" href="<? echo esc_url( home_url( '/' ) ); ?>" rel="home">
