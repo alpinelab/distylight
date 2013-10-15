@@ -25,7 +25,7 @@ if (check_user_role('editor')) {
   //
   function remove_menu_items() {
     global $menu;
-    $restricted = array(__('Media'), __('Comments'), __('Contact'), __('Pages'), __('Tools'));
+    $restricted = array(__('Media'), __('Comments'), __('Contact'), __('Tools'));
     end ($menu);
     while (prev($menu)){
       $value = explode(' ',$menu[key($menu)][0]);
