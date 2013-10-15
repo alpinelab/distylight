@@ -13,10 +13,12 @@ get_header();
       $featured_image = wp_get_attachment_image_src(get_post_thumbnail_id(), 'slider-normal');
       if ($featured_image)
         $featured_image_url = $featured_image[0]; ?>
-      <div class="featured-image"
-           style="background-image: url('<?= $featured_image_url ?>');"
-           alt="<?= get_the_title() ?>">
-      </div> <?
+      <a href="<?= $featured_image_url ?>" rel="lightbox">
+        <div class="featured-image"
+             style="background-image: url('<?= $featured_image_url ?>');"
+             alt="<?= get_the_title() ?>">
+        </div>
+      </a> <?
     } ?>
 
     <div class="row">
