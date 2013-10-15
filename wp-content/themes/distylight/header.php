@@ -16,6 +16,7 @@
 <link rel="pingback" href="<? bloginfo( 'pingback_url' ); ?>" />
 
 <? wp_head(); ?>
+<? include_once('google-analytics.php'); ?>
 </head>
 
 <body <? body_class(); ?>>
