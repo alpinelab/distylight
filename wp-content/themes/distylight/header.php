@@ -9,11 +9,13 @@
 ?><!DOCTYPE html>
 <html <? language_attributes(); ?>>
 <head>
-<meta charset="<? bloginfo( 'charset' ); ?>" />
-<meta name="viewport" content="width=device-width" />
+<meta charset="<? bloginfo( 'charset' ); ?>">
+<meta name="viewport" content="width=device-width">
 <title><? wp_title( '|', true, 'right' ); ?></title>
-<link rel="profile" href="http://gmpg.org/xfn/11" />
-<link rel="pingback" href="<? bloginfo( 'pingback_url' ); ?>" />
+<link rel="profile" href="http://gmpg.org/xfn/11">
+<link rel="pingback" href="<? bloginfo( 'pingback_url' ); ?>">
+<link rel="icon" href="<? bloginfo('template_directory') ?>/favicon.png" type="image/png">
+<link rel="shortcut icon" href="<? bloginfo('template_directory') ?>/favicon.ico" type="image/x-icon">
 
 <? wp_head(); ?>
 <? include_once('google-analytics.php'); ?>
@@ -26,7 +28,7 @@
 			<a class="blog" href="<?= esc_url(home_url('/blog')) ?>" rel="blog">BLOG</a> <?
 		} ?>
 		<a class="brand" href="<? echo esc_url( home_url( '/' ) ); ?>" rel="home">
-			<img src="<? bloginfo('template_directory') ?>/images/logo.svg" alt="<? bloginfo( 'name' ); ?>" />
+			<img src="<? bloginfo('template_directory') ?>/images/logo.svg" alt="<? bloginfo( 'name' ); ?>">
 		</a>
 
 		<? wp_nav_menu(array(
