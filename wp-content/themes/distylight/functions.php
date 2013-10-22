@@ -147,6 +147,10 @@ function the_portfolio_url() {
   echo $portfolio ? wp_get_attachment_url($portfolio->ID) : 'ERROR';
 }
 
+/**
+ * Disable <link rel="next"> tags to avoid Firefox prefetching
+ */
+remove_action('wp_head', 'adjacent_posts_rel_link_wp_head');
 
 /**
  * Custom template tags for this theme.
