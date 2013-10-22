@@ -6,3 +6,4 @@
 .htaccess
 /wp-content/uploads/
 /wp-content/cache/
+/wp-content/plugins/db-cache-reloaded-fix/cache/
