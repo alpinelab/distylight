@@ -148,11 +148,6 @@ function the_portfolio_url() {
 }
 
 /**
- * Disable <link rel="next"> tags to avoid Firefox prefetching
- */
-remove_action('wp_head', 'adjacent_posts_rel_link_wp_head');
-
-/**
  * Custom template tags for this theme.
  */
 require get_template_directory() . '/inc/template-tags.php';
