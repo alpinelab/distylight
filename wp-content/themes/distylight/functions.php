@@ -111,7 +111,7 @@ add_action( 'wp_enqueue_scripts', 'distylight_scripts' );
 /**
  * Disable the admin bar when viewing the site as an administrator
  */
-add_filter( 'show_admin_bar', '__return_false' );
+// add_filter( 'show_admin_bar', '__return_false' );
 
 /**
  * Implement the Custom Header feature.
