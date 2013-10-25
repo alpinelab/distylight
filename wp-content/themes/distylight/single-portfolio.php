@@ -46,7 +46,7 @@
     </div>
   </div> <?
 
-  $images = rwmb_meta( 'portfolio_project_gallery', 'type=image&size=portfolio-large' );
+  $images = rwmb_meta( 'portfolio_project_gallery', 'type=image&size=distylight-large' );
   foreach ( $images as $image ) { ?>
     <div class="row project-image">
       <div class="span12">

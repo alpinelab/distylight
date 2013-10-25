@@ -16,7 +16,7 @@ get_header(); ?>
         if ($idx++ == 0) { ?>
           <div class="post"> <?
             if (has_post_thumbnail()) {
-              $featured_image = wp_get_attachment_image_src(get_post_thumbnail_id(), 'slider-normal');
+              $featured_image = wp_get_attachment_image_src(get_post_thumbnail_id(), 'distylight-normal');
               if ($featured_image)
                 $featured_image_url = $featured_image[0]; ?>
               <a class="featured-image"

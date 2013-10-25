@@ -10,7 +10,7 @@ get_header();
   while (have_posts()) : the_post();
 
     if (has_post_thumbnail()) {
-      $featured_image = wp_get_attachment_image_src(get_post_thumbnail_id(), 'slider-normal');
+      $featured_image = wp_get_attachment_image_src(get_post_thumbnail_id(), 'distylight-normal');
       if ($featured_image)
         $featured_image_url = $featured_image[0]; ?>
       <a href="<?= $featured_image_url ?>" rel="lightbox">

@@ -58,7 +58,7 @@ function display_slider() {
   $args = array('post_type' => 'slider', 'numberposts' => 1);
   $slides = get_posts($args);
   if ($slides) {
-    $images = rwmb_meta('slider_gallery', 'type=image&size=portfolio-large', $slides[0]->ID); ?>
+    $images = rwmb_meta('slider_gallery', 'type=image&size=distylight-large', $slides[0]->ID); ?>
 
     <ul class="codrops-slideshow"> <?
 

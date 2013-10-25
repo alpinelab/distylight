@@ -10,7 +10,7 @@
       <div class="row">
         <div class="span2">
           <a href="<? the_permalink() ?>"> <?
-            the_post_thumbnail('portfolio-thumbnail') ?>
+            the_post_thumbnail('distylight-thumbnail') ?>
           </a>
         </div>
         <div class="span6">
