@@ -31,7 +31,7 @@ header.navigation
     list-style: none
     position: absolute
     right: 0
-    top: 40%
+    top: 30%
     .menu-item
       margin: 0
       margin-right: 3em
@@ -39,9 +39,14 @@ header.navigation
       float: left
       height: 5em
       position: relative
+      h2
+        margin: 0
+        font-size: 1.5em
+        line-height: 1.1em
       a
         color: white
-        font-size: 1.5em
+        font-size: 1em
+        font-weight: normal
         position: relative
         text-decoration: none
         &:hover
@@ -57,7 +62,7 @@ header.navigation
           top: -0.2em
           +opacity(0)
       &.current-menu-item, &.current-menu-parent
-        & > a
+        & > h2 a
           color: $dlYellow
           &::before
             +opacity(100)
@@ -75,7 +80,7 @@ header.navigation
     width: 100em // this is a fallback dirty value for what's next
     +width(max-content)
     z-index: 300
-    top: 35%
+    top: 40%
     &:hover
       display: block
     .menu-item
@@ -93,7 +98,7 @@ header.navigation
 .single-post
   header.navigation
     .menu-item.current_page_parent
-      & > a
+      & > h2 a
         color: $dlYellow
         &::before
           +opacity(100)

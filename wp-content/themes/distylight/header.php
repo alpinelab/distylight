@@ -33,7 +33,9 @@
 
 		<? wp_nav_menu(array(
 			'theme_location' 	=> 'primary',
-      'container'  => false
+      'container'  => false,
+      'before' => '<h2>',
+      'after' => '</h2>'
 	  )); ?>
 	</header>
 
