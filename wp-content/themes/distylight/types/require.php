@@ -27,12 +27,9 @@ require_once(ABSPATH.'wp-content/themes/distylight/types/slider_metaboxes.php');
 
 if (function_exists('add_image_size'))
 {
-  add_image_size('slider-small',        1280, 800,  true);
-  add_image_size('slider-normal',       1680, 1050, true);
-  add_image_size('slider-large',        1920, 1200, true);
-  add_image_size('portfolio-thumbnail-square', 384, 384, true);
-  add_image_size('portfolio-thumbnail', 384,  240,  true);
-  add_image_size('portfolio-small',     1280, 800,  true);
-  add_image_size('portfolio-normal',    1680, 1050, true);
-  add_image_size('portfolio-large',     1920, 1200, true);
+  add_image_size('distylight-thumbnail',        384,  240,  true);
+  add_image_size('distylight-thumbnail-square', 384,  384,  true);
+  add_image_size('distylight-small',            1280, 800,  true);
+  add_image_size('distylight-normal',           1680, 1050, true);
+  add_image_size('distylight-large',            1920, 1200, true);
 }

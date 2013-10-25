@@ -25,9 +25,9 @@ get_header(); ?>
     <div class="span3">
       <a href="<? the_permalink(); ?>"><?
         if (has_post_thumbnail())
-          the_post_thumbnail('portfolio-thumbnail-square', array('alt' => get_the_title()));
+          the_post_thumbnail('distylight-thumbnail-square', array('alt' => get_the_title()));
         else {
-          $image = array_shift(rwmb_meta( 'portfolio_project_gallery', 'type=image&size=portfolio-thumbnail-square'));
+          $image = array_shift(rwmb_meta( 'portfolio_project_gallery', 'type=image&size=distylight-thumbnail-square'));
           if ($image) ?>
             <img src="<? echo $image['url'] ?>" alt="<? the_title() ?>"> <?
         } ?>
