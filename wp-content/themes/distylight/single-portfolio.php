@@ -50,7 +50,9 @@
   foreach ( $images as $image ) { ?>
     <div class="row project-image">
       <div class="span12">
-        <img src="<?= $image['url'] ?>"  alt="<?= $image['alt'] ?>">
+        <a href="<?= $image['url'] ?>" rel="lightbox[project]">
+          <img src="<?= $image['url'] ?>"  alt="<?= $image['alt'] ?>">
+        </a>
       </div>
     </div> <?
   } ?>
