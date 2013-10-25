@@ -111,7 +111,7 @@ add_action( 'wp_enqueue_scripts', 'distylight_scripts' );
 /**
  * Disable the admin bar when viewing the site as an administrator
  */
-add_filter( 'show_admin_bar', '__return_false' );
+// add_filter( 'show_admin_bar', '__return_false' );
 
 /**
  * Implement the Custom Header feature.
@@ -146,11 +146,6 @@ function the_portfolio_url() {
   $portfolio = array_shift($attachments);
   echo $portfolio ? wp_get_attachment_url($portfolio->ID) : 'ERROR';
 }
-
-/**
- * Disable <link rel="next"> tags to avoid Firefox prefetching
- */
-remove_action('wp_head', 'adjacent_posts_rel_link_wp_head');
 
 /**
  * Custom template tags for this theme.
