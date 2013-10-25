@@ -28,12 +28,14 @@
 			<a class="blog" href="<?= esc_url(home_url('/blog')) ?>" rel="blog">BLOG</a> <?
 		} ?>
 		<a class="brand" href="<? echo esc_url( home_url( '/' ) ); ?>" rel="home">
-			<img src="<? bloginfo('template_directory') ?>/images/logo.svg" alt="<? bloginfo( 'name' ); ?>">
+			<h1><img src="<? bloginfo('template_directory') ?>/images/logo.svg" alt="<? bloginfo( 'name' ); ?>"></h1>
 		</a>
 
 		<? wp_nav_menu(array(
 			'theme_location' 	=> 'primary',
-      'container'  => false
+      'container'  => false,
+      'before' => '<h2>',
+      'after' => '</h2>'
 	  )); ?>
 	</header>
 
