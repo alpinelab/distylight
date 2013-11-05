@@ -93,6 +93,8 @@ add_action( 'widgets_init', 'distylight_widgets_init' );
 function distylight_scripts() {
 
 	wp_enqueue_style( 'distylight-style', get_stylesheet_uri() );
+	wp_enqueue_style( 'twitter-bootstrap', '//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.2/css/bootstrap.min.css' );
+	wp_enqueue_style( 'twitter-bootstrap-responsive', '//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.2/css/bootstrap-responsive.min.css' );
 
 	wp_deregister_script('jquery');
 	wp_register_script('jquery', '//cdnjs.cloudflare.com/ajax/libs/jquery/1.10.2/jquery.min.js', array(), '1.10.2', false);
