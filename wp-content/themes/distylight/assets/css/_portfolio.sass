@@ -40,11 +40,17 @@
 
 .projects-navigation
   font-size: 4em
+  width: 100%
+  .half
+    width: 50%
+    &.left
+      float: left
+    &.right
+      float: right
+      text-align: right
   a, a:hover
     text-decoration: none
     color: white
   a:hover
     color: $dlYellow
     font-weight: bold
-  div:last-child a
-    float: right
