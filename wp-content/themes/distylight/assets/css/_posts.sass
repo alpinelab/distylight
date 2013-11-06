@@ -5,9 +5,6 @@
     color: $dlYellow
     text-decoration: none
   header.navigation
-    top: 2em
-    padding: 1.5em
-    padding-left: 2.5em
     .brand
       float: left
       display: block
@@ -15,22 +12,37 @@
         text-decoration: none
       img
         width: 30%
-        margin: 0 0 0 0.7em
         position: relative
-        bottom: -0.5em
     .blog
       float: left
-      line-height: 0.5em
       color: white
-      font-size: 4em
       font-family: misolight
       text-decoration: none
+  @media screen and (min-width: 980px)
+    header.navigation
+      top: 2em
+      padding: 1.5em
+      padding-left: 2.5em
+      .blog
+        font-size: 4em
+        line-height: 0.5em
+      .brand img
+        margin: 0 0 0 0.7em
+        bottom: -0.5em
+  @media screen and (max-width: 979px)
+    header.navigation
+      .blog
+        font-size: 3em
+        line-height: 0.75em
+      .brand img
+        margin-left: 0.3em
 
   #primary
     position: relative
     top: 10em
     .span9
-      border-right: solid 2px $dlYellow
+      @media screen and (min-width: 768px)
+        border-right: solid 2px $dlYellow
       margin-right: -2px
       padding-right: 2em
       +box-sizing(border-box)
