@@ -1,6 +1,6 @@
 #projects-grid
   .row, .row-fluid
-    margin-bottom: $gridGutterWidth
+    margin-bottom: 20px
     .span3
       position: relative
       &:not(:hover)::after
@@ -11,6 +11,12 @@
         top: 0
         left: 0
         background-color: rgba(0,0,0,0.3)
+    @media screen and (max-width: 767px)
+      .span3
+        margin-bottom: 20px
+        a
+          text-align: center
+          display: block
 
 .single-portfolio
   color: white
@@ -34,11 +40,17 @@
 
 .projects-navigation
   font-size: 4em
+  width: 100%
+  .half
+    width: 50%
+    &.left
+      float: left
+    &.right
+      float: right
+      text-align: right
   a, a:hover
     text-decoration: none
     color: white
   a:hover
     color: $dlYellow
     font-weight: bold
-  div:last-child a
-    float: right

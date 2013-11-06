@@ -1,11 +1,18 @@
 .team-members
   .row
+    .span2, .span4
+      @media screen and (min-width: 980px)
+        height: 180px
+      @media screen and (max-width: 979px) and (min-width: 768px)
+        height: 160px
+      @media screen and (max-width: 767px)
+        height: 140px
     .span4
-      height: 180px
       position: relative
       font-size: 0.85em
       &:nth-child(2)
-        border-right: solid 1px $dlYellow
+        @media screen and (min-width: 768px)
+          border-right: solid 1px $dlYellow
         .team-member-infos
           left: 0
       &:nth-child(3)
@@ -16,7 +23,12 @@
         font-size: 1.5em
         color: white
         position: absolute
-        bottom: 30px
+        @media screen and (min-width: 980px)
+          bottom: 30px
+        @media screen and (max-width: 979px) and (min-width: 768px)
+          bottom: 60px
+        @media screen and (max-width: 767px)
+          top: 1em
         p
           margin-bottom: 0.2em
     .span2
@@ -24,3 +36,14 @@
       img
         border: solid 1px $dlYellow
         display: inline-block
+    @media screen and (max-width: 767px)
+      .span4, .span2
+        float: left
+      .span4
+        width: 75%
+        &:nth-child(2) .team-member-infos
+          margin-left: 20px
+        &:nth-child(3) .team-member-infos
+          margin-right: 20px
+      .span2
+        width: 25%

@@ -2,9 +2,9 @@
 
 <div class="container">
 
-  <div class="row projects-navigation">
-    <div class="span6"><? previous_post_link('%link', '&larr;'); ?></div>
-    <div class="span6"><? next_post_link('%link', '&rarr;'); ?></div>
+  <div class="projects-navigation">
+    <div class="half left"><? previous_post_link('%link', '&larr;'); ?></div>
+    <div class="half right"><? next_post_link('%link', '&rarr;'); ?></div>
   </div>
 
   <div class="row">
