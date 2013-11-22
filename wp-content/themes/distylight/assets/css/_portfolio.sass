@@ -3,7 +3,8 @@
     margin-bottom: 20px
     .span3
       position: relative
-      &:not(:hover)::after
+    @media screen and (min-width: 768px)
+      .span3:not(:hover)::after
         content: ''
         position: absolute
         width: 100%
