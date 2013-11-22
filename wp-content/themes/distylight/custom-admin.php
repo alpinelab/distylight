@@ -19,13 +19,12 @@ function check_user_role($role, $user_id = null) {
 
 
 if (check_user_role('editor')) {
-
   //
   // Remove items from menu
   //
   function remove_menu_items() {
     global $menu;
-    $restricted = array(__('Media'), __('Comments'), __('Contact'), __('Tools'));
+    $restricted = array(__('Media'), __('Comments'), __('Tools'));
     end ($menu);
     while (prev($menu)){
       $value = explode(' ',$menu[key($menu)][0]);
@@ -36,6 +35,54 @@ if (check_user_role('editor')) {
   }
   add_action('admin_menu', 'remove_menu_items');
 
+  //
+  // Add projects to "Right Now" dashboard widget
+  //
+  function portfolio_in_rightnow() {
+    $types = 'portfolio';
+    if (!post_type_exists(''.$types.'')) { return; }
+    $num_posts = wp_count_posts(''.$types.'');
+    $nbr_ = 'Projet';
+    $nbr_s = 'Projets';
+    $num = number_format_i18n($num_posts->publish);
+    $text = _n('' . $nbr_ . '', '' . $nbr_s . '', intval($num_posts->publish));
+    if (current_user_can('edit_posts')) {
+      $num = "<a href='edit.php?post_type=$types'>$num</a>";
+      $text = "<a href='edit.php?post_type=$types'>$text</a>";
+    }
+    echo '<tr><td class="first b">' . $num . '</td><td class="t">' . $text . '</td></tr>';
+    if ($num_posts->pending > 0) {
+      $num = number_format_i18n($num_posts->pending);
+      $text = _n('En attente', 'En attentes', intval($num_posts->pending));
+      if (current_user_can('edit_posts')) {
+        $num = "<a href='edit.php?post_status=pending&post_type=$types'>$num</a>";
+        $text = "<a class='waiting' href='edit.php?post_status=pending&post_type=$types'>$text</a>";
+      }
+      echo '<tr><td class="first b">' . $num . '</td><td class="t">' . $text . '</td></tr>';
+    }
+  }
+  add_action('right_now_content_table_end', 'portfolio_in_rightnow');
+}
+
+if (check_user_role('contributor') || check_user_role('author')) {
+  //
+  // Remove even more items from menu
+  //
+  function remove_menu_items() {
+    global $menu;
+    $restricted = array(__('Projects'), __('Slides'), __('Media'), __('Comments'), __('Tools'));
+    end ($menu);
+    while (prev($menu)){
+      $value = explode(' ',$menu[key($menu)][0]);
+      if(in_array($value[0] != NULL ? $value[0] : "" , $restricted)){
+        unset($menu[key($menu)]);
+      }
+    }
+  }
+  add_action('admin_menu', 'remove_menu_items');
+}
+
+if (check_user_role('editor') || check_user_role('contributor') || check_user_role('author')) {
   //
   // Remove columns in posts listing
   //
@@ -96,33 +143,5 @@ if (check_user_role('editor')) {
   add_filter('screen_options_show_screen', 'remove_screen_options');
 
 }
-
-//
-// Add projects to "Right Now" dashboard widget
-//
-function portfolio_in_rightnow() {
-  $types = 'portfolio';
-  if (!post_type_exists(''.$types.'')) { return; }
-  $num_posts = wp_count_posts(''.$types.'');
-  $nbr_ = 'Projet';
-  $nbr_s = 'Projets';
-  $num = number_format_i18n($num_posts->publish);
-  $text = _n('' . $nbr_ . '', '' . $nbr_s . '', intval($num_posts->publish));
-  if (current_user_can('edit_posts')) {
-    $num = "<a href='edit.php?post_type=$types'>$num</a>";
-    $text = "<a href='edit.php?post_type=$types'>$text</a>";
-  }
-  echo '<tr><td class="first b">' . $num . '</td><td class="t">' . $text . '</td></tr>';
-  if ($num_posts->pending > 0) {
-    $num = number_format_i18n($num_posts->pending);
-    $text = _n('En attente', 'En attentes', intval($num_posts->pending));
-    if (current_user_can('edit_posts')) {
-      $num = "<a href='edit.php?post_status=pending&post_type=$types'>$num</a>";
-      $text = "<a class='waiting' href='edit.php?post_status=pending&post_type=$types'>$text</a>";
-    }
-    echo '<tr><td class="first b">' . $num . '</td><td class="t">' . $text . '</td></tr>';
-  }
-}
-add_action('right_now_content_table_end', 'portfolio_in_rightnow');
 
 ?>
